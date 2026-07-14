@@ -1,0 +1,2 @@
+/* Fonts are loaded via next/font (Barlow Condensed + Manrope) in src/app/layout.tsx,
+   exposed as --font-barlow / --font-manrope on <html>. No external @import. */
