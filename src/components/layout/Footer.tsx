@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { SITE } from "@/data/site";
 
 export default function Footer() {
@@ -7,12 +8,14 @@ export default function Footer() {
     <footer className="border-t border-border px-6 md:px-10 py-12">
       <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-10">
         <div className="md:col-span-1">
-          <Link
-            href="/"
-            className="text-primary font-black text-3xl leading-none block mb-3"
-            style={{ fontFamily: "var(--font-barlow), sans-serif" }}
-          >
-            AES
+          <Link href="/" className="inline-block mb-3" aria-label="AES — Ayman Ehab Studio, home">
+            <Image
+              src="/aes-logo.png"
+              alt="AES — Ayman Ehab Studio"
+              width={360}
+              height={206}
+              className="h-8 w-auto"
+            />
           </Link>
           <p className="text-muted-foreground text-xs leading-relaxed max-w-[180px]">
             {SITE.tagline}

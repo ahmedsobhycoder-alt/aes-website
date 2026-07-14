@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { SITE } from "@/data/site";
 
@@ -23,13 +24,15 @@ export default function Nav() {
       }`}
     >
       <nav className="flex items-center justify-between px-6 md:px-10 h-16">
-        <Link href="/" className="flex items-center gap-1">
-          <span
-            className="text-primary font-black text-2xl tracking-tight leading-none"
-            style={{ fontFamily: "var(--font-barlow), sans-serif", letterSpacing: "-0.02em" }}
-          >
-            AES
-          </span>
+        <Link href="/" className="flex items-center gap-1" aria-label="AES — Ayman Ehab Studio, home">
+          <Image
+            src="/aes-logo.png"
+            alt="AES — Ayman Ehab Studio"
+            width={360}
+            height={206}
+            priority
+            className="h-6 w-auto"
+          />
           <span className="hidden sm:block text-[10px] text-muted-foreground uppercase tracking-[0.2em] ml-2 mt-1">
             Art Direction
           </span>
