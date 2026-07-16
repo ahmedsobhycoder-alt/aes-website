@@ -1,11 +1,40 @@
+# AES — Ayman Ehab Studio
 
-  # Landing page redesign variants
+Website for AES, an art-direction and interior-design studio based in Cairo.
 
-  This is a code bundle for Landing page redesign variants. The original project is available at https://www.figma.com/design/QhWxX4cef56fSk9SxKrDyx/Landing-page-redesign-variants.
+Built with Next.js (App Router), Tailwind CSS, and Framer Motion. The whole
+site is statically generated, so it deploys as plain static files to any web root.
 
-  ## Running the code
+## Development
 
-  Run `npm i` to install the dependencies.
+```bash
+npm install
+npm run dev
+```
 
-  Run `npm run dev` to start the development server.
-  
+Then open http://localhost:3000.
+
+## Build
+
+```bash
+NEXT_PUBLIC_SITE_URL=https://aes-designstudio.com npm run build
+```
+
+This outputs a static site to the `out/` folder.
+
+## Deploy
+
+Upload the contents of `out/` to the site's web root (e.g. `htdocs/aes-designstudio.com/`):
+
+```bash
+cp -r out/* /path/to/htdocs/aes-designstudio.com/
+```
+
+No Node server is required in production — it's static HTML, CSS, JS, and images.
+
+## Structure
+
+- `src/app` — routes (App Router)
+- `src/components` — UI + page components
+- `src/data` — site content (projects, blog, services, SEO)
+- `public/projects` — project imagery
