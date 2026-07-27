@@ -119,4 +119,26 @@ export const PROJECTS: Project[] = [
     outcome: "A polished, considered interior with a strong sense of place.",
     gallery: g("salon-ali-yehia", [1, 2, 3, 4, 5, 6], "Salon Ali Yehia"),
   },
+  {
+  slug: "hyde-park",
+  title: "Hyde Park",
+  category: "Residential",
+  year: "",
+  cover: "projects/hyde-park/hydepark1.jpg",
+  alt: "Hyde Park residential interior",
+  tags: ["Residential"],
+  client: "Private Client",
+  role: "Interior Design · Art Direction · Turnkey Execution",
+  challenge:
+    "A family apartment in Hyde Park, New Cairo, with a familiar developer shell and an unfamiliar ambition: a home that feels composed, not furnished.",
+  approach:
+    "We directed a modern contemporary language built on calm: a warm neutral palette, clean architectural lines, and layered lighting that shifts the apartment from daylight ease to evening intimacy, with natural wood and stone holding the scene together.",
+  outcome:
+    "A residence that reads as one continuous frame, where every room answers the same design sentence, delivered turnkey as one production.",
+  gallery: g(
+    "hyde-park",
+    [1, 2, 3, 4, 5, 6],
+    "Hyde Park"
+  ),
+}
 ];

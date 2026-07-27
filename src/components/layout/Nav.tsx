@@ -33,9 +33,7 @@ export default function Nav() {
             priority
             className="h-6 w-auto"
           />
-          <span className="hidden sm:block text-[10px] text-muted-foreground uppercase tracking-[0.2em] ml-2 mt-1">
-            Art Direction
-          </span>
+
         </Link>
 
         <ul className="hidden md:flex items-center gap-8">

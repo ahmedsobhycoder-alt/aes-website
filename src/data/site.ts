@@ -3,7 +3,7 @@ export const SITE = {
   fullName: "AES — Ayman Ehab Studio",
   tagline: "We don't just design spaces, we shape experiences.",
   motto: "We Create Vibes",
-  established: "2018",
+  established: "2020",
   contact: {
     phone: "+20 100 408 5006",
     phoneHref: "+201004085006",
@@ -13,10 +13,9 @@ export const SITE = {
     location: "Cairo, Egypt",
   },
   socials: [
-    { label: "Instagram", href: "https://instagram.com/aes.artdirection" },
-    { label: "Behance", href: "https://behance.net/" },
-    { label: "LinkedIn", href: "https://linkedin.com/" },
-    { label: "Facebook", href: "https://facebook.com/" },
+    { label: "Instagram", href: " https://www.instagram.com/aes_designstudio?igsh=MTZtbHB2c3ZxYmQxNQ==" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/aes-interior-design-architecture/" },
+    { label: "Facebook", href: "https://www.facebook.com/share/1GWRhvFK1F/?mibextid=wwXIfr" },
   ],
   values: ["Creativity", "Innovation", "Top-Notch Quality", "Functionality", "Transparency"],
   nav: [

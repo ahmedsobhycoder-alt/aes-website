@@ -9,7 +9,7 @@ const BASE_TITLE = "AES — Ayman Ehab Studio";
 
 export const SEO: Record<string, PageSeo> = {
   "/": { title: `${BASE_TITLE} · We Create Vibes`, description: "AES is an art direction and interior design studio. We don't just design spaces, we shape experiences — from concept and branding to execution and F&B consultancy.", canonicalPath: "/", ogImage: "/projects/ozel/01.jpg" },
-  "/about": { title: `About · ${BASE_TITLE}`, description: "Founded in 2018 by Ayman & Ehab Sobhy, AES brings art direction and interior design together to create spaces with their own vibe.", canonicalPath: "/about" },
+  "/about": { title: `About · ${BASE_TITLE}`, description: "Founded in 2020 by Ayman & Ehab Sobhy, AES brings art direction and interior design together to create spaces with their own vibe.", canonicalPath: "/about" },
   "/services": { title: `Services · ${BASE_TITLE}`, description: "Art Direction, Execution & Construction, and Food & Beverage Consultancy — holistic design delivered turnkey.", canonicalPath: "/services" },
   "/work": { title: `Work · ${BASE_TITLE}`, description: "Selected interior, hospitality, and branding projects by AES.", canonicalPath: "/work" },
   "/philosophy": { title: `Philosophy · ${BASE_TITLE}`, description: "Art and design are inextricably linked. The careful integration of art into design is what sets AES apart.", canonicalPath: "/philosophy" },

@@ -6,7 +6,7 @@ import { FadeUp, FadeIn, StaggerChildren, StaggerItem } from "@/components/anima
 import { SITE } from "@/data/site";
 
 const STATS = [
-  { value: "2018", label: "Established" },
+  { value: "2020", label: "Established" },
   { value: "20+", label: "Projects Delivered" },
   { value: "03", label: "Core Disciplines" },
   { value: "MENA", label: "Region Served" },
@@ -92,7 +92,7 @@ export default function AboutPage() {
                   className="font-black uppercase text-foreground leading-[0.98]"
                   style={{ fontFamily: "var(--font-barlow), sans-serif", fontSize: "clamp(1.8rem, 3.2vw, 3rem)", letterSpacing: "-0.01em" }}
                 >
-                  Founded in 2018 by Ayman &amp; Ehab Sobhy on one belief: <span className="text-primary">a space without its own vibe loses its potential</span> — no matter how polished the design.
+                  Founded in 2020 by Ayman &amp; Ehab Sobhy on one belief: <span className="text-primary">a space without its own vibe loses its potential</span> — no matter how polished the design.
                 </p>
               </FadeUp>
               <FadeUp delay={0.1}>
