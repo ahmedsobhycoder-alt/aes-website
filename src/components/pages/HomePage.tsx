@@ -25,6 +25,12 @@ const TICKER_ITEMS = [
   "Brand Experience",
 ];
 
+// Services with a dedicated detail page. Anything not listed falls back to the
+// services index, so rows stay linked as more detail pages are added.
+const SERVICE_ROUTES: Record<string, string> = {
+  "Art Direction": "/services/art-direction",
+};
+
 const heroStagger = {
   hidden: {},
   show: { transition: { staggerChildren: 0.12, delayChildren: 0.35 } },
@@ -340,33 +346,26 @@ export default function HomePage() {
 
       {/* OUR CLIENTS */}
       <section className="border-t border-border px-6 md:px-10 py-24">
-        <div className="max-w-screen-xl mx-auto">
-          <FadeUp>
-            <span className="text-[10px] uppercase tracking-[0.3em] text-primary block mb-6">
-              {CLIENTS_SECTION.eyebrow}
-            </span>
+        <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10">
+          <FadeUp className="md:col-span-3">
+            <h2
+              className="text-4xl font-black text-primary uppercase"
+              style={{
+                fontFamily: "var(--font-barlow), sans-serif",
+              }}
+            >
+              {CLIENTS_SECTION.heading}
+            </h2>
           </FadeUp>
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 mb-20">
-            <FadeUp delay={0.05} className="md:col-span-7">
-              <h2
-                className="font-black uppercase text-foreground leading-[0.92]"
-                style={{
-                  fontFamily: "var(--font-barlow), sans-serif",
-                  fontSize: "clamp(2.25rem, 4.5vw, 3.75rem)",
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                {CLIENTS_SECTION.title}
-              </h2>
-            </FadeUp>
-            <FadeUp delay={0.15} className="md:col-span-5 md:self-end">
-              <p className="text-muted-foreground text-sm leading-loose max-w-md">
-                {CLIENTS_SECTION.body}
-              </p>
-            </FadeUp>
-          </div>
-
-          <FadeUp delay={0.2}>
+          <FadeUp delay={0.1} className="md:col-span-12">
+            <p
+              className="text-2xl md:text-3xl font-light leading-snug text-foreground md:mb-12"
+              style={{ fontFamily: "var(--font-barlow), sans-serif" }}
+            >
+              {CLIENTS_SECTION.body}
+            </p>
+          </FadeUp>
+          <FadeUp delay={0.2} className="md:col-span-12">
             <ul className="grid grid-cols-2 md:grid-cols-3 border-t border-l border-border">
               {CLIENTS.map((c, i) => (
                 <li
@@ -425,10 +424,11 @@ export default function HomePage() {
             <div className="flex flex-col">
               {SERVICES.map((s, i) => (
                 <Link
-                  href="/services"
+                  href={SERVICE_ROUTES[s.title] ?? "/services"}
                   key={s.num}
                   onMouseEnter={() => setActiveService(i)}
-                  className="group flex items-center gap-5 border-t border-border py-6 last:border-b"
+                  onFocus={() => setActiveService(i)}
+                  className="group flex items-center gap-5 border-t border-border py-6 last:border-b outline-none focus-visible:ring-1 focus-visible:ring-primary focus-visible:ring-offset-4 focus-visible:ring-offset-background"
                 >
                   <span
                     className={`text-xs uppercase tracking-[0.2em] w-8 flex-shrink-0 transition-colors duration-300 ${activeService === i ? "text-primary" : "text-muted-foreground"}`}

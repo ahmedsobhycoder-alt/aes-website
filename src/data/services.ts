@@ -40,21 +40,9 @@ export const SERVICES: Service[] = [
     ],
     img: "/projects/nuwa/01.jpg",
   },
+
   {
     num: "04",
-    title: "Architecture",
-    desc: "We develop architectural solutions that respond to the site, operational requirements, environmental conditions, and the long-term vision of the project.",
-    deliverables: [
-      "Design Development",
-      "Functional Programming",
-      "Architectural Detailing",
-      "Consultant Coordination",
-      "Authority Submission Drawings",
-    ],
-    img: "/projects/nuwa/01.jpg",
-  },
-  {
-    num: "05",
     title: "Execution & Construction",
     desc: "We carry the approved design into reality, managing site operations, technical coordination, quality, procurement, and delivery from start to handover.",
     deliverables: [
@@ -67,7 +55,7 @@ export const SERVICES: Service[] = [
     img: "/projects/nuwa/01.jpg",
   },
   {
-    num: "06",
+    num: "05",
     title: "Brand Experience",
     desc: "We turn brand strategy into a complete physical experience, connecting space, identity, communication, and customer interaction across every touchpoint.",
     deliverables: [

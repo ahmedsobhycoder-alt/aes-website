@@ -6,9 +6,8 @@ export type Client = {
 };
 
 export const CLIENTS_SECTION = {
-  eyebrow: "Our Clients",
-  title: "Built With Those Who Expect More.",
-  body: "From established operators to emerging concepts, AES works with clients who treat design as a strategic decision, not a finishing layer.",
+  heading: "Our Clients",
+  body: "AES collaborates with established operators, developers, and emerging brands that treat design as a strategic decision. Through architecture, interiors, execution, and brand direction, we build lasting environments shaped by clarity, precision, and purpose.",
 };
 
 export const CLIENTS: Client[] = [
