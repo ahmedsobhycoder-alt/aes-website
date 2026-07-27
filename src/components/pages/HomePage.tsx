@@ -25,12 +25,6 @@ const TICKER_ITEMS = [
   "Brand Experience",
 ];
 
-// Services with a dedicated detail page. Anything not listed falls back to the
-// services index, so rows stay linked as more detail pages are added.
-const SERVICE_ROUTES: Record<string, string> = {
-  "Art Direction": "/services/art-direction",
-};
-
 const heroStagger = {
   hidden: {},
   show: { transition: { staggerChildren: 0.12, delayChildren: 0.35 } },
@@ -424,7 +418,7 @@ export default function HomePage() {
             <div className="flex flex-col">
               {SERVICES.map((s, i) => (
                 <Link
-                  href={SERVICE_ROUTES[s.title] ?? "/services"}
+                  href={`/services/${s.slug}`}
                   key={s.num}
                   onMouseEnter={() => setActiveService(i)}
                   onFocus={() => setActiveService(i)}

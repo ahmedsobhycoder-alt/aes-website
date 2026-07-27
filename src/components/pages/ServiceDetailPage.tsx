@@ -52,26 +52,25 @@ export default function ServiceDetailPage({ slug }: { slug: string }) {
 
       {/* INTRO */}
       <section className="border-b border-border px-6 md:px-10 py-24">
-        <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16">
-          <div className="md:col-span-4">
-            <FadeUp>
-              <span className="text-[10px] uppercase tracking-[0.3em] text-primary block mb-6">What It Is</span>
-              <p
-                className="font-black uppercase text-foreground leading-[0.95]"
-                style={{ fontFamily: "var(--font-barlow), sans-serif", fontSize: "clamp(1.75rem, 3vw, 2.75rem)", letterSpacing: "-0.02em" }}
-              >
-                {service.desc}
-              </p>
-            </FadeUp>
-          </div>
-          <div className="md:col-span-7 md:col-start-6">
-            <FadeUp delay={0.1}>
-              <p
-                className="text-foreground text-lg leading-relaxed"
-                style={{ fontFamily: "var(--font-barlow), sans-serif" }}
-              >
-                {service.longDesc}
-              </p>
+        <div className="max-w-screen-xl mx-auto">
+          <FadeUp>
+            <span className="text-[10px] uppercase tracking-[0.3em] text-primary block mb-10">What It Is</span>
+          </FadeUp>
+          <FadeUp delay={0.05}>
+            <p
+              className="font-light text-foreground leading-[1.12] max-w-4xl"
+              style={{ fontFamily: "var(--font-barlow), sans-serif", fontSize: "clamp(1.75rem, 4vw, 3.25rem)", letterSpacing: "-0.01em" }}
+            >
+              {service.desc}
+            </p>
+          </FadeUp>
+          <div className="grid grid-cols-1 md:grid-cols-12 mt-14 md:mt-20">
+            <FadeUp delay={0.1} className="md:col-span-6 md:col-start-7">
+              <div className="border-t border-border pt-8">
+                <p className="text-muted-foreground text-sm md:text-base leading-loose">
+                  {service.longDesc}
+                </p>
+              </div>
             </FadeUp>
           </div>
         </div>
