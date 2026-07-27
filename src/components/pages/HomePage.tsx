@@ -14,6 +14,7 @@ import { FadeUp } from "@/components/animations";
 import { PROJECTS } from "@/data/projects";
 import { SERVICES } from "@/data/services";
 import { SITE } from "@/data/site";
+import { CLIENTS, CLIENTS_SECTION, type Client } from "@/data/clients";
 import { EmailLink } from "@/components/Cta";
 
 const TICKER_ITEMS = [
@@ -132,6 +133,31 @@ function HeroSlideshow() {
           ))}
         </div>
       </div>
+    </div>
+  );
+}
+
+function ClientCell({ client, index }: { client: Client; index: number }) {
+  return (
+    <div className="group relative flex h-full min-h-[152px] md:min-h-[212px] flex-col items-center justify-center gap-5 px-5 py-10 md:px-8 md:py-14">
+      <span
+        aria-hidden
+        className="absolute top-3 left-3 md:top-4 md:left-4 text-[9px] uppercase tracking-[0.3em] text-muted-foreground/50 transition-colors duration-700 group-hover:text-primary"
+      >
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      <div className="relative h-14 w-full md:h-20">
+        <Image
+          src={client.image}
+          alt={client.alt}
+          fill
+          sizes="(max-width:768px) 45vw, 30vw"
+          className="object-contain opacity-70 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:opacity-100 group-hover:scale-[1.03]"
+        />
+      </div>
+      <span className="text-center text-[10px] uppercase tracking-[0.2em] text-muted-foreground transition-colors duration-700 group-hover:text-primary">
+        {client.name}
+      </span>
     </div>
   );
 }
@@ -308,6 +334,49 @@ export default function HomePage() {
                 {v}
               </span>
             ))}
+          </FadeUp>
+        </div>
+      </section>
+
+      {/* OUR CLIENTS */}
+      <section className="border-t border-border px-6 md:px-10 py-24">
+        <div className="max-w-screen-xl mx-auto">
+          <FadeUp>
+            <span className="text-[10px] uppercase tracking-[0.3em] text-primary block mb-6">
+              {CLIENTS_SECTION.eyebrow}
+            </span>
+          </FadeUp>
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 mb-20">
+            <FadeUp delay={0.05} className="md:col-span-7">
+              <h2
+                className="font-black uppercase text-foreground leading-[0.92]"
+                style={{
+                  fontFamily: "var(--font-barlow), sans-serif",
+                  fontSize: "clamp(2.25rem, 4.5vw, 3.75rem)",
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                {CLIENTS_SECTION.title}
+              </h2>
+            </FadeUp>
+            <FadeUp delay={0.15} className="md:col-span-5 md:self-end">
+              <p className="text-muted-foreground text-sm leading-loose max-w-md">
+                {CLIENTS_SECTION.body}
+              </p>
+            </FadeUp>
+          </div>
+
+          <FadeUp delay={0.2}>
+            <ul className="grid grid-cols-2 md:grid-cols-3 border-t border-l border-border">
+              {CLIENTS.map((c, i) => (
+                <li
+                  key={c.id}
+                  className="border-b border-r border-border bg-muted"
+                >
+                  <ClientCell client={c} index={i} />
+                </li>
+              ))}
+            </ul>
           </FadeUp>
         </div>
       </section>
