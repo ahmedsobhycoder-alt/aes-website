@@ -181,3 +181,84 @@
     line-height: 1.5;
   }
 }
+
+/**
+ * Arabic / RTL.
+ *
+ * Scoped entirely behind [dir="rtl"], so none of it can reach the English site.
+ * Nothing above this block was modified.
+ */
+@layer base {
+  /* Re-point the SAME variables components already reference inline. This makes
+     every `style={{ fontFamily: "var(--font-barlow)" }}` resolve to Noto Kufi
+     without touching a single component. */
+  [dir="rtl"] {
+    --font-barlow: var(--font-kufi);
+    --font-manrope: var(--font-kufi);
+    font-family: var(--font-kufi), sans-serif;
+    line-height: 1.85;
+  }
+
+  /* Arabic has no letter case, and letter-spacing severs the cursive joins that
+     make a word legible. An !important stylesheet rule also outranks the
+     non-important inline `letterSpacing` on the hero H1. Together these two
+     declarations neutralise all 148 `uppercase` + 101 `tracking-[…]` utilities. */
+  [dir="rtl"] * {
+    text-transform: none !important;
+    letter-spacing: normal !important;
+  }
+
+  /* Display leading of 0.82–0.95 clips Arabic ascenders and diacritics. */
+  [dir="rtl"] :is(h1, h2, h3, h4) {
+    line-height: 1.3 !important;
+  }
+
+  /* Noto Kufi at 300 is anaemic next to Barlow Condensed Light. */
+  [dir="rtl"] .font-light {
+    font-weight: 400;
+  }
+}
+
+/**
+ * Homepage marquee + scrollbar.
+ *
+ * Moved out of an inline <style> in HomePage.tsx: React escapes the `"` in
+ * [dir="rtl"] to &quot; in the server HTML but emits literal quotes on the
+ * client, so the style element's text content differed and hydration failed.
+ *
+ * Left unlayered on purpose — the original <style> tag was unlayered too, and
+ * unlayered rules outrank @layer ones, so the cascade is unchanged.
+ */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-rtl {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 28s linear infinite;
+}
+
+[dir="rtl"] .animate-marquee {
+  animation-name: marquee-rtl;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+}
