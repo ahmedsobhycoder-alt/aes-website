@@ -9,8 +9,9 @@ import {
   useScroll,
   useTransform,
   useReducedMotion,
+  useInView,
 } from "motion/react";
-import { FadeUp } from "@/components/animations";
+import { FadeUp, CountUp } from "@/components/animations";
 import { PROJECTS } from "@/data/projects";
 import { SERVICES } from "@/data/services";
 import { SITE } from "@/data/site";
@@ -174,6 +175,9 @@ export default function HomePage() {
   const locale = useLocale();
   const reduce = useReducedMotion();
   const [activeService, setActiveService] = useState(0);
+  /** One shared trigger so both stat counters start together with the section. */
+  const statsRef = useRef<HTMLDivElement>(null);
+  const statsInView = useInView(statsRef, { once: true, margin: "-80px" });
   return (
     <div>
       {/* HERO */}
@@ -292,10 +296,13 @@ export default function HomePage() {
             </p>
           </FadeUp>
           <FadeUp delay={0.2} className="md:col-span-12">
-            <div className="md:col-span-12 flex w-full flex-col md:flex-row mdmd:items-center md:justify-center md:gap-20 ">
+            <div
+              ref={statsRef}
+              className="md:col-span-12 flex w-full flex-col md:flex-row mdmd:items-center md:justify-center md:gap-20 "
+            >
               <div className="md:flex-col md:items-center md:justify-center ">
                 <p
-                  className="text-[100px] font-black text-primary"
+                  className="text-[100px] font-black text-primary text-center"
                   style={{ fontFamily: "var(--font-barlow), sans-serif" }}
                 >
                   {HOME.est2020[locale]}
@@ -309,7 +316,7 @@ export default function HomePage() {
                   className="text-[100px]  font-black text-center text-primary"
                   style={{ fontFamily: "var(--font-barlow), sans-serif" }}
                 >
-                  80+
+                  <CountUp to={80} suffix="+" start={statsInView} />
                 </p>
                 <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground text-center mt-1">
                   {HOME.projectsExecuted[locale]}
@@ -320,7 +327,7 @@ export default function HomePage() {
                   className="text-[100px] font-black text-primary text-center"
                   style={{ fontFamily: "var(--font-barlow), sans-serif" }}
                 >
-                  10+
+                  <CountUp to={10} suffix="+" start={statsInView} />
                 </p>
                 <p className="text-xs uppercase tracking-[0.2em] text-muted-foreground text-center mt-1">
                   {HOME.industriesExecuted[locale]}

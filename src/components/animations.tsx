@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useReducedMotion } from "motion/react";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
@@ -67,6 +67,66 @@ export function StaggerChildren({ children, className = "" }: { children: React.
     >
       {children}
     </motion.div>
+  );
+}
+
+/**
+ * Numeric counter that animates from 0 to `to` once, when it scrolls into view.
+ *
+ * Renders `0` on the server and on the first client paint, so the markup is
+ * identical on both sides — no hydration mismatch.
+ *
+ * Pass `start` to drive several counters from one shared trigger (e.g. a whole
+ * stats row); omit it and the counter watches itself.
+ */
+export function CountUp({
+  to,
+  suffix = "",
+  duration = 1.8,
+  start,
+  className = "",
+}: {
+  to: number;
+  suffix?: string;
+  duration?: number;
+  start?: boolean;
+  className?: string;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const selfInView = useInView(ref, { once: true, margin: "-80px" });
+  const reduceMotion = useReducedMotion();
+  const [value, setValue] = useState(0);
+  const active = start ?? selfInView;
+
+  useEffect(() => {
+    if (!active) return;
+    if (reduceMotion) {
+      setValue(to);
+      return;
+    }
+
+    // ease-out cubic: quick off the mark, settling into the final number
+    const easeOut = (t: number) => 1 - Math.pow(1 - t, 3);
+    const ms = duration * 1000;
+    let frame = 0;
+    let startedAt: number | null = null;
+
+    const tick = (now: number) => {
+      if (startedAt === null) startedAt = now;
+      const t = Math.min((now - startedAt) / ms, 1);
+      setValue(Math.round(easeOut(t) * to));
+      if (t < 1) frame = requestAnimationFrame(tick);
+    };
+
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [active, reduceMotion, to, duration]);
+
+  return (
+    <span ref={ref} className={className}>
+      {value}
+      {suffix}
+    </span>
   );
 }
 
