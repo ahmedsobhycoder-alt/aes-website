@@ -1,6 +1,12 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
+  /**
+   * Accent lime is #B8E048 — sampled directly from public/aes-logo.png, where it
+   * is the dominant saturated colour. The previous #C8D831 sat at hue 68deg
+   * against the logo's 76deg, which is why it read as neon yellow beside it.
+   * Change it here only: every accent on the site resolves through these tokens.
+   */
   --font-size: 16px;
   --background: #080808;
   --foreground: #F0EFE8;
@@ -8,13 +14,13 @@
   --card-foreground: #F0EFE8;
   --popover: #111111;
   --popover-foreground: #F0EFE8;
-  --primary: #C8D831;
+  --primary: #B8E048;
   --primary-foreground: #080808;
   --secondary: #1A1A1A;
   --secondary-foreground: #F0EFE8;
   --muted: #1E1E1E;
   --muted-foreground: #888880;
-  --accent: #C8D831;
+  --accent: #B8E048;
   --accent-foreground: #080808;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
@@ -24,8 +30,8 @@
   --switch-background: #333333;
   --font-weight-medium: 500;
   --font-weight-normal: 400;
-  --ring: #C8D831;
-  --chart-1: #C8D831;
+  --ring: #B8E048;
+  --chart-1: #B8E048;
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
@@ -33,12 +39,12 @@
   --radius: 0rem;
   --sidebar: #111111;
   --sidebar-foreground: #F0EFE8;
-  --sidebar-primary: #C8D831;
+  --sidebar-primary: #B8E048;
   --sidebar-primary-foreground: #080808;
   --sidebar-accent: #1A1A1A;
   --sidebar-accent-foreground: #F0EFE8;
   --sidebar-border: rgba(240, 239, 232, 0.1);
-  --sidebar-ring: #C8D831;
+  --sidebar-ring: #B8E048;
 }
 
 .dark {

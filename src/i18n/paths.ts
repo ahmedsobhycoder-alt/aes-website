@@ -38,7 +38,7 @@ export function localizedPath(canonical: string, locale: Locale): string {
  * linking to an unbuilt /ar/<path> would 404 on a static host. Add entries here
  * as each Arabic route ships.
  */
-export const AR_AVAILABLE: ReadonlySet<string> = new Set(["/"]);
+export const AR_AVAILABLE: ReadonlySet<string> = new Set(["/", "/about"]);
 
 export function hasArabic(canonical: string): boolean {
   return AR_AVAILABLE.has(canonical);

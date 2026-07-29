@@ -217,3 +217,99 @@ export const CLIENT_NAMES: Record<number, I18nText> = {
   8: { en: "Ozel", ar: "أوزيل" },
   9: { en: "MinaMark Resort & Spa", ar: "مينامارك ريزورت آند سبا" },
 };
+
+/* ------------------------------------------------------------------ About */
+
+export const ABOUT = {
+  heroLine1: { en: "About", ar: "عن" },
+  heroLine2: { en: "AES", ar: "AES" },
+  heroAlt: {
+    en: "AES interior — Aaly Al Makam",
+    ar: "تصميم داخلي من AES — عالي المقام",
+  },
+
+  // ---- Manifesto ----
+  storyEyebrow: { en: "Our Story", ar: "حكايتنا" },
+  storyAlt: { en: "AES interior — Ozel", ar: "تصميم داخلي من AES — أوزيل" },
+  /**
+   * Three fragments, because the middle one is wrapped in the lime accent span.
+   * Kept separate so the translator controls Arabic word order around the
+   * highlight instead of it being concatenated in JSX.
+   */
+  manifestoLead: {
+    en: "Founded in 2020 by Ayman & Ehab Sobhy on one belief:",
+    ar: "اتأسس سنة 2020 على إيد أيمن وإيهاب صبحي على قناعة واحدة:",
+  },
+  manifestoHighlight: {
+    en: "a space without its own vibe loses its potential",
+    ar: "المكان من غير إحساس خاص بيه بيضيّع إمكانياته",
+  },
+  manifestoTail: {
+    en: "— no matter how polished the design.",
+    ar: "— مهما كان التصميم متقن.",
+  },
+  storyBody1: {
+    en: "We are a one-stop studio that transforms spaces of all types — residential, commercial, and hospitality — handling everything from concept and design to execution, decoration, and branding. Our approach is holistic and turnkey: we see a project through from inception to completion and beyond.",
+    ar: "إحنا استوديو متكامل بنحوّل كل أنواع الأماكن — سكني وتجاري وضيافة — وبنمسك كل حاجة من الفكرة والتصميم لحد التنفيذ والديكور والهوية. منهجنا شامل ومن الألف للياء: بنمشي مع المشروع من أول لحظة لحد ما يخلص وبعدها كمان.",
+  },
+  storyBody2: {
+    en: "Our secret is a deep-rooted belief in the power of art, a rich understanding of diverse cultures, and unparalleled expertise. These let us craft tailored atmospheres that resonate — leaving lasting impressions and breathing life into every project.",
+    ar: "سرّنا إيمان عميق بقوة الفن، وفهم واسع لثقافات مختلفة، وخبرة مالهاش مثيل. ده اللي بيخلّينا نصمم أجواء مفصّلة على المكان توصل للناس — تسيب أثر يفضل وتدّي المشروع روح.",
+  },
+
+  // ---- Founders ----
+  foundersEyebrow: { en: "The Founders", ar: "المؤسسون" },
+
+  // ---- Mission / Vision / Values ----
+  missionVisionEyebrow: { en: "Mission & Vision", ar: "رسالتنا ورؤيتنا" },
+  missionHeading: { en: "Mission", ar: "رسالتنا" },
+  visionHeading: { en: "Vision", ar: "رؤيتنا" },
+  mission: {
+    en: "We exist to design spaces that inspire, energize, and captivate. Through innovation, artistic vision, and a commitment to constant evolution, we set new standards in commercial design, creating environments that leave a lasting impact.",
+    ar: "إحنا موجودين عشان نصمم أماكن تلهم وتدّي طاقة وتشدّ الانتباه. بالابتكار والرؤية الفنية والالتزام بالتطور المستمر، بنضع معايير جديدة في التصميم التجاري، وبنخلق بيئات تسيب أثر يفضل.",
+  },
+  vision: {
+    en: "To redefine commercial design standards and become the leading innovator in the Middle East by delivering holistic solutions with expertise in branding and design, execution, furnishing, operations, food and beverage consultancy, and more.",
+    ar: "إننا نعيد تعريف معايير التصميم التجاري ونبقى الرائد الأول في الشرق الأوسط، من خلال حلول متكاملة وخبرة في الهوية والتصميم والتنفيذ والتأثيث والتشغيل واستشارات المطاعم والكافيهات وغيرها.",
+  },
+  valuesEyebrow: { en: "Our Values", ar: "قيمنا" },
+} satisfies Record<string, I18nText>;
+
+/** Order matches the STATS array in AboutPage.tsx. */
+export const ABOUT_STATS: { value: I18nText; label: I18nText }[] = [
+  {
+    value: { en: "2020", ar: "2020" },
+    label: { en: "Established", ar: "سنة التأسيس" },
+  },
+  {
+    value: { en: "20+", ar: "20+" },
+    label: { en: "Projects Delivered", ar: "مشروع اتسلّم" },
+  },
+  {
+    value: { en: "03", ar: "03" },
+    label: { en: "Core Disciplines", ar: "تخصصات أساسية" },
+  },
+  {
+    // Not a numeral, so unlike the others this value genuinely translates.
+    value: { en: "MENA", ar: "الشرق الأوسط" },
+    label: { en: "Region Served", ar: "المنطقة اللي بنخدمها" },
+  },
+];
+
+/** Order matches the FOUNDERS array in AboutPage.tsx. */
+export const ABOUT_FOUNDERS: { name: I18nText; role: I18nText }[] = [
+  {
+    name: { en: "Ayman Sobhy", ar: "أيمن صبحي" },
+    role: {
+      en: "Art Director · Interior Designer · Co-Founder",
+      ar: "مدير فني · مصمم داخلي · شريك مؤسس",
+    },
+  },
+  {
+    name: { en: "Ehab Sobhy", ar: "إيهاب صبحي" },
+    role: {
+      en: "Art Director · Interior Designer · Co-Founder",
+      ar: "مدير فني · مصمم داخلي · شريك مؤسس",
+    },
+  },
+];
