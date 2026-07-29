@@ -1,0 +1,12 @@
+node_modules/
+dist/
+
+# Uploaded media served by express.static — not source, and not covered by the
+# repository-root .gitignore.
+uploads/
+
+.env
+.env.local
+
+# Temporary Phase 1 verification env (deleted after the run)
+.env.local-test

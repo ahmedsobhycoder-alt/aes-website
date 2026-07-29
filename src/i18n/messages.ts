@@ -60,7 +60,7 @@ export const HOME = {
   est2020: { en: "Est. 2020", ar: "تأسس 2020" },
   since2013: { en: "Since 2013", ar: "من سنة 2013" },
   projectsExecuted: { en: "Projects Executed", ar: "مشروع اتنفذ" },
-  industriesExecuted: { en: "industries Executed", ar: "مجال اشتغلنا فيه" },
+  industriesExecuted: { en: "industries Served", ar: "مجال اشتغلنا فيه" },
 
   // ---- Clients ----
   clientsHeading: { en: "Our Clients", ar: "عملاؤنا" },
