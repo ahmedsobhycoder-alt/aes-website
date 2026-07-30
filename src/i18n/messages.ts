@@ -41,7 +41,7 @@ export const HOME = {
     ar: "إدارة فنية | عمارة | تصميم داخلي | تنفيذ",
   },
   heroLine1: { en: "We Create", ar: "إحنا بنصنع" },
-  heroLine2: { en: "Experience", ar: "التجربة" },
+  heroLine2: { en: "Experiences", ar: "التجارب" },
   viewOurWork: { en: "View Our Work", ar: "شوف أعمالنا" },
   tagline: {
     en: "We don't just design spaces, we shape experiences.",
@@ -54,13 +54,13 @@ export const HOME = {
   // ---- About strip ----
   aboutHeading: { en: "About AES", ar: "عن AES" },
   aboutBody: {
-    en: "AES is an art direction and interior design studio founded in 2020 by Ayman & Ehab Sobhy. We bring art and design together — from concept and branding to execution and F&B consultancy — to shape spaces with their own vibe.",
+    en: "AES is an art direction and interior design studio founded in 2020 by Ayman & Ehab Sobhy. We bring art and design together - from concept and branding to execution and F&B consultancy - to shape spaces with their own vibe.",
     ar: "AES استوديو إدارة فنية وتصميم داخلي، اتأسس سنة 2020 على إيد أيمن وإيهاب صبحي. بنجمع الفن والتصميم مع بعض — من الفكرة والهوية لحد التنفيذ واستشارات المطاعم والكافيهات — عشان نطلّع أماكن ليها إحساسها الخاص.",
   },
   est2020: { en: "Est. 2020", ar: "تأسس 2020" },
   since2013: { en: "Since 2013", ar: "من سنة 2013" },
   projectsExecuted: { en: "Projects Executed", ar: "مشروع اتنفذ" },
-  industriesExecuted: { en: "industries Served", ar: "مجال اشتغلنا فيه" },
+  industriesExecuted: { en: "industries Served ", ar: "مجال اشتغلنا فيه" },
 
   // ---- Clients ----
   clientsHeading: { en: "Our Clients", ar: "عملاؤنا" },
@@ -174,34 +174,59 @@ export const SERVICE_COPY: Record<string, { title: I18nText; desc: I18nText }> =
   },
 };
 
-export const PROJECT_COPY: Record<string, { title: I18nText; category: I18nText }> = {
+export const PROJECT_COPY: Record<
+  string,
+  { title: I18nText; category: I18nText; role: I18nText }
+> = {
   ozel: {
     title: { en: "Ozel", ar: "أوزيل" },
     category: { en: "Hospitality & F&B", ar: "ضيافة ومطاعم" },
+    role: {
+      en: "Art Direction · Interior Design · Execution",
+      ar: "إدارة فنية · تصميم داخلي · تنفيذ",
+    },
   },
   nuwa: {
     title: { en: "Nuwa", ar: "نوا" },
     category: { en: "Hospitality & F&B", ar: "ضيافة ومطاعم" },
+    role: {
+      en: "Art Direction · Interior Design · Execution",
+      ar: "إدارة فنية · تصميم داخلي · تنفيذ",
+    },
   },
   "aaly-al-makam": {
     title: { en: "Aaly Al Makam", ar: "عالي المقام" },
     category: { en: "Hospitality & F&B", ar: "ضيافة ومطاعم" },
+    role: {
+      en: "Art Direction · Interior Design",
+      ar: "إدارة فنية · تصميم داخلي",
+    },
   },
   rixance: {
     title: { en: "Rixance", ar: "ريكسانس" },
     category: { en: "Branding", ar: "هوية تجارية" },
+    role: {
+      en: "Art Direction · Branding · Retail Concept",
+      ar: "إدارة فنية · هوية تجارية · مفهوم تجاري",
+    },
   },
   "magaz-clinic": {
     title: { en: "Magaz Clinic", ar: "عيادة مچاز" },
     category: { en: "Commercial", ar: "تجاري" },
+    role: { en: "Interior Design · Execution", ar: "تصميم داخلي · تنفيذ" },
   },
   "salon-ali-yehia": {
     title: { en: "Salon Ali Yehia", ar: "صالون علي يحيى" },
     category: { en: "Commercial", ar: "تجاري" },
+    role: { en: "Interior Design · Art Direction", ar: "تصميم داخلي · إدارة فنية" },
   },
   "hyde-park": {
     title: { en: "Hyde Park", ar: "هايد بارك" },
     category: { en: "Residential", ar: "سكني" },
+    role: {
+      en: "Interior Design · Art Direction · Turnkey Execution",
+      ar: "تصميم داخلي · إدارة فنية · تنفيذ متكامل",
+    },
   },
 };
 
@@ -217,6 +242,293 @@ export const CLIENT_NAMES: Record<number, I18nText> = {
   8: { en: "Ozel", ar: "أوزيل" },
   9: { en: "MinaMark Resort & Spa", ar: "مينامارك ريزورت آند سبا" },
 };
+
+/* --------------------------------------------------------------- Services */
+
+export const SERVICES_PAGE = {
+  heroEyebrow: { en: "What We Do", ar: "بنعمل إيه" },
+  heroLine1: { en: "Our", ar: "خدماتنا" },
+  heroLine2: { en: "Services", ar: "بالتفصيل" },
+  ctaHeading: { en: "Ready to Start?", ar: "جاهز تبدأ؟" },
+  ctaButton: { en: "Enquire Now", ar: "اطلب عرض دلوقتي" },
+} satisfies Record<string, I18nText>;
+
+/**
+ * Deliverable bullets keyed by service slug. Order matches the `deliverables`
+ * array of each record in src/data/services.ts.
+ */
+export const SERVICE_DELIVERABLES: Record<string, I18nText[]> = {
+  "art-direction": [
+    { en: "Creative Concept", ar: "المفهوم الإبداعي" },
+    { en: "Art Direction Strategy", ar: "استراتيجية الإدارة الفنية" },
+    { en: "Visual Language", ar: "اللغة البصرية" },
+    { en: "Material & Mood Direction", ar: "اتجاه الخامات والمزاج" },
+    { en: "Brand Integration", ar: "دمج الهوية" },
+  ],
+  "interior-design": [
+    { en: "Space Planning", ar: "توزيع المساحات" },
+    { en: "Interior Concept Design", ar: "تصميم المفهوم الداخلي" },
+    { en: "Material Specifications", ar: "مواصفات الخامات" },
+    { en: "Furniture & Lighting Selection", ar: "اختيار الأثاث والإضاءة" },
+    { en: "Technical Design Package", ar: "حزمة التصميم الفني" },
+  ],
+  architecture: [
+    { en: "Architectural Concept", ar: "المفهوم المعماري" },
+    { en: "Site Planning", ar: "تخطيط الموقع" },
+    { en: "Floor Plan Development", ar: "تطوير المساقط الأفقية" },
+    { en: "Facade Design", ar: "تصميم الواجهات" },
+    { en: "Construction Documentation", ar: "مستندات التنفيذ" },
+  ],
+  "execution-construction": [
+    { en: "Project Management", ar: "إدارة المشروع" },
+    { en: "Site Execution", ar: "التنفيذ في الموقع" },
+    { en: "MEP Coordination", ar: "تنسيق الأعمال الكهروميكانيكية" },
+    { en: "Procurement & Installation", ar: "التوريد والتركيب" },
+    { en: "Quality Control & Handover", ar: "ضبط الجودة والتسليم" },
+  ],
+  "brand-experience": [
+    { en: "Brand Experience Strategy", ar: "استراتيجية تجربة العلامة" },
+    { en: "Customer Journey Mapping", ar: "رسم رحلة العميل" },
+    { en: "Environmental Branding", ar: "الهوية في المكان" },
+    { en: "Signage & Wayfinding", ar: "اللافتات وإرشاد الحركة" },
+    { en: "Physical Brand Touchpoints", ar: "نقاط التماس المادية للعلامة" },
+  ],
+};
+
+/* ------------------------------------------------------------------- Blog */
+
+export const BLOG = {
+  heroEyebrow: { en: "Journal", ar: "المدونة" },
+  heroLine1: { en: "Studio", ar: "ملاحظات" },
+  heroLine2: { en: "Notes", ar: "الاستوديو" },
+  read: { en: "Read", ar: "اقرأ" },
+  all: { en: "All", ar: "الكل" },
+} satisfies Record<string, I18nText>;
+
+/**
+ * Category labels keyed by the RAW English category in src/data/blog.ts.
+ * The filter compares against that raw value, so only the label is translated —
+ * translating the key itself would break filtering.
+ */
+export const BLOG_CATEGORY_LABELS: Record<string, I18nText> = {
+  "Art Direction": { en: "Art Direction", ar: "إدارة فنية" },
+  Execution: { en: "Execution", ar: "تنفيذ" },
+  "F&B": { en: "F&B", ar: "مطاعم وكافيهات" },
+};
+
+/**
+ * Per-post copy keyed by slug. `date` is a prose string in the data layer
+ * ("June 2026"), not a Date, so the Arabic month is written out rather than
+ * formatted with Intl.
+ *
+ * Post BODIES are not here — the detail pages at /blog/[slug] remain English.
+ */
+export const BLOG_COPY: Record<
+  string,
+  { title: I18nText; excerpt: I18nText; date: I18nText }
+> = {
+  "why-every-space-needs-a-vibe": {
+    title: {
+      en: "Why Every Space Needs Its Own Vibe",
+      ar: "ليه كل مكان محتاج إحساسه الخاص",
+    },
+    excerpt: {
+      en: "A space without a distinctive vibe loses its potential — no matter how polished the design. Here is how we design the feeling first.",
+      ar: "المكان من غير إحساس مميز بيضيّع إمكانياته — مهما كان التصميم متقن. ودي طريقتنا في إننا نصمم الإحساس الأول.",
+    },
+    date: { en: "June 2026", ar: "يونيو 2026" },
+  },
+  "concept-to-turnkey": {
+    title: {
+      en: "From Concept to Turnkey: How AES Delivers",
+      ar: "من الفكرة للتسليم: إزاي AES بتنفّذ",
+    },
+    excerpt: {
+      en: "The vision that starts on paper too often dies in execution. Our turnkey model exists to make sure it survives all the way to the finished space.",
+      ar: "الرؤية اللي بتبدأ على الورق كتير بتموت في التنفيذ. نظامنا المتكامل موجود عشان توصل للمكان النهائي زي ما هي.",
+    },
+    date: { en: "May 2026", ar: "مايو 2026" },
+  },
+  "fb-design-menu-meets-interior": {
+    title: {
+      en: "F&B Design: Where the Menu Meets the Interior",
+      ar: "تصميم المطاعم: لما المنيو يقابل المكان",
+    },
+    excerpt: {
+      en: "A restaurant is a business before it is a mood board. Our F&B consultancy designs the concept, the space, and the numbers as one.",
+      ar: "المطعم مشروع تجاري قبل ما يكون لوحة إلهام. استشاراتنا بتصمم الفكرة والمكان والأرقام مع بعض.",
+    },
+    date: { en: "April 2026", ar: "أبريل 2026" },
+  },
+};
+
+/* ------------------------------------------------------------------- Work */
+
+export const WORK = {
+  heroEyebrow: { en: "Portfolio", ar: "أعمالنا" },
+  heroLine1: { en: "Selected", ar: "مختارات من" },
+  heroLine2: { en: "Work", ar: "أعمالنا" },
+  intro: {
+    en: "Interior, hospitality, and branding projects — designed, art-directed, and delivered turnkey by AES.",
+    ar: "مشاريع تصميم داخلي وضيافة وهوية تجارية — تصميم وإدارة فنية وتنفيذ متكامل من AES.",
+  },
+  viewProject: { en: "View Project", ar: "شوف المشروع" },
+  empty: {
+    en: "No projects in this category yet.",
+    ar: "مافيش مشاريع في القسم ده لسه.",
+  },
+} satisfies Record<string, I18nText>;
+
+/**
+ * Filter chips. `value` is the identity used to match Project.tags and must stay
+ * English — translating it would silently break filtering, since the comparison
+ * is against the raw tag strings in src/data/projects.ts.
+ *
+ * NOTE: "Residential" is absent here but IS used by the hyde-park project, so
+ * that project is currently unreachable through the filter UI. Pre-existing bug,
+ * left as-is rather than changing the visible filter set unasked.
+ */
+export const WORK_TAGS: { value: string; label: I18nText }[] = [
+  { value: "All", label: { en: "All", ar: "الكل" } },
+  { value: "Hospitality & F&B", label: { en: "Hospitality & F&B", ar: "ضيافة ومطاعم" } },
+  { value: "Commercial", label: { en: "Commercial", ar: "تجاري" } },
+  { value: "Branding", label: { en: "Branding", ar: "هوية تجارية" } },
+];
+
+/* ---------------------------------------------------------------- Contact */
+
+export const CONTACT = {
+  heroEyebrow: { en: "Get In Touch", ar: "تواصل معانا" },
+  heroAlt: {
+    en: "AES interior — Salon Ali Yehia",
+    ar: "تصميم داخلي من AES — صالون علي يحيى",
+  },
+  heroLine1: { en: "Let's Work", ar: "يلا نشتغل" },
+  heroLine2: { en: "Together", ar: "مع بعض" },
+
+  intro: {
+    en: "We work with brands, businesses, and individuals who care deeply about the quality of what they make. If that sounds like you, we'd like to hear from you.",
+    ar: "بنشتغل مع علامات وشركات وأفراد بيهتموا فعلاً بجودة اللي بيعملوه. لو ده وصفك، يبقى نفسنا نسمع منك.",
+  },
+
+  // ---- Info column ----
+  emailLabel: { en: "Email", ar: "الإيميل" },
+  phoneLabel: { en: "Phone", ar: "التليفون" },
+  whatsapp: { en: "WhatsApp", ar: "واتساب" },
+  studioLabel: { en: "Studio", ar: "الاستوديو" },
+  location: { en: "Cairo, Egypt", ar: "القاهرة، مصر" },
+  followLabel: { en: "Follow", ar: "تابعنا" },
+
+  // ---- Form ----
+  nameLabel: { en: "Name", ar: "الاسم" },
+  namePlaceholder: { en: "Your name", ar: "اسمك" },
+  emailPlaceholder: { en: "your@email.com", ar: "your@email.com" },
+  serviceLabel: { en: "Service Interest", ar: "الخدمة المهتم بيها" },
+  servicePlaceholder: { en: "Select a service", ar: "اختار خدمة" },
+  messageLabel: { en: "Message", ar: "رسالتك" },
+  messagePlaceholder: { en: "Tell us about your project", ar: "احكيلنا عن مشروعك" },
+  submit: { en: "Send Enquiry", ar: "ابعت طلبك" },
+
+  // ---- Post-submit (mailto handoff) ----
+  sentEyebrow: { en: "Almost There", ar: "فاضل خطوة" },
+  sentHeading: { en: "Check Your Email App", ar: "افتح تطبيق الإيميل" },
+  sentBody: {
+    en: "Your email app should have opened with the enquiry ready to send. Press send there and we'll be in touch within 2 business days.",
+    ar: "تطبيق الإيميل المفروض فتح ومعاه طلبك جاهز للإرسال. اضغط إرسال من هناك وهنرد عليك خلال يومين عمل.",
+  },
+  fallbackLead: {
+    en: "Nothing opened? Use the link below, or email us directly at",
+    ar: "مافتحش حاجة؟ استخدم اللينك تحت، أو ابعتلنا على طول على",
+  },
+  reopen: { en: "Open Email App Again", ar: "افتح تطبيق الإيميل تاني" },
+  edit: { en: "Edit Enquiry", ar: "عدّل الطلب" },
+} satisfies Record<string, I18nText>;
+
+/**
+ * Order matches SERVICES_OPTIONS in ContactPage.tsx.
+ *
+ * NOTE: this list has drifted from src/data/services.ts — it names three
+ * services where the studio now offers five, and "Food & Beverage Consultancy"
+ * is no longer among them. Translated as-is; worth reconciling separately.
+ */
+export const CONTACT_SERVICE_OPTIONS: I18nText[] = [
+  { en: "Art Direction", ar: "الإدارة الفنية" },
+  { en: "Execution & Construction", ar: "التنفيذ والإنشاء" },
+  { en: "Food & Beverage Consultancy", ar: "استشارات المطاعم والكافيهات" },
+];
+
+/* ------------------------------------------------------------- Philosophy */
+
+export const PHILOSOPHY = {
+  heroEyebrow: { en: "Our Philosophy", ar: "فلسفتنا" },
+  heroAlt: {
+    en: "AES interior — Aaly Al Makam",
+    ar: "تصميم داخلي من AES — عالي المقام",
+  },
+  /** Three lines because the headline is hard-broken with <br />; the third is lime. */
+  heroLine1: { en: "Art &", ar: "الفن" },
+  heroLine2: { en: "Design Are", ar: "والتصميم" },
+  heroLine3: { en: "One", ar: "شيء واحد" },
+
+  quote1: {
+    en: '"Our design philosophy revolves around the belief that art and design are inextricably linked — and that the careful integration of art into design is what sets us apart."',
+    ar: "«فلسفتنا في التصميم قايمة على إيمان إن الفن والتصميم مايتفصلوش عن بعض — وإن دمج الفن في التصميم بعناية هو اللي بيفرّقنا.»",
+  },
+
+  processAlt: { en: "Studio process", ar: "من كواليس الاستوديو" },
+  processEyebrow: { en: "How We Work", ar: "إزاي بنشتغل" },
+  processBody1: {
+    en: "Our process is not linear and it is not templated. It begins with the question: what does this work need to do? Not what does it need to look like — what does it need to do. Everything else follows from that.",
+    ar: "شغلنا مش خط مستقيم ومش قالب جاهز. بيبدأ بسؤال: المشروع ده محتاج يعمل إيه؟ مش شكله يبقى إيه — يعمل إيه. وكل حاجة بعد كده بتيجي من الإجابة دي.",
+  },
+  processBody2: {
+    en: "We work closely with clients throughout, not as service providers but as thinking partners. The best outcomes come from genuine collaboration — when both sides bring something the other cannot.",
+    ar: "بنشتغل مع العميل جنب لجنب من الأول للآخر، مش كمقدّمي خدمة لكن كشركاء في التفكير. أحسن النتايج بتيجي من تعاون حقيقي — لما كل طرف يجيب حاجة التاني مايقدرش يجيبها.",
+  },
+
+  principlesEyebrow: { en: "How We Think", ar: "إزاي بنفكر" },
+  principlesHeading: { en: "Core Principles", ar: "مبادئنا الأساسية" },
+
+  quote2: {
+    en: '"The connection between marketing, branding, and interior design isn\'t just an advantage — it\'s essential."',
+    ar: "«الربط بين التسويق والهوية والتصميم الداخلي مش ميزة زيادة — ده أساس.»",
+  },
+  quote2Support: {
+    en: "A space without distinctive vibes loses much of its potential, even with stunning interior design. We design the vibe first — then everything serves it.",
+    ar: "المكان من غير إحساس مميز بيضيّع كتير من إمكانياته، حتى لو التصميم الداخلي مبهر. إحنا بنصمم الإحساس الأول — وبعدين كل حاجة بتخدمه.",
+  },
+
+  ctaHeading: { en: "Work With Us", ar: "اشتغل معانا" },
+  ctaButton: { en: "Start a Conversation", ar: "يلا نتكلم" },
+} satisfies Record<string, I18nText>;
+
+/** Order matches the PRINCIPLES array in PhilosophyPage.tsx. `num` is locale-invariant. */
+export const PHILOSOPHY_PRINCIPLES: { num: string; title: I18nText; body: I18nText }[] = [
+  {
+    num: "01",
+    title: { en: "Create The Vibe First", ar: "ابدأ بالإحساس" },
+    body: {
+      en: "Before materials or layout, we define the feeling a space must create. Every decision after that serves the vibe — that is what makes a space unforgettable.",
+      ar: "قبل الخامات وقبل التوزيع، بنحدد الإحساس اللي المكان لازم يعمله. وكل قرار بعد كده بيخدم الإحساس ده — وده اللي بيخلي المكان مايتنسيش.",
+    },
+  },
+  {
+    num: "02",
+    title: { en: "Art & Design As One", ar: "الفن والتصميم شيء واحد" },
+    body: {
+      en: "We refuse the false line between art and design. The careful integration of art into interiors and architecture is the thing that sets our work apart.",
+      ar: "إحنا رافضين الخط الوهمي بين الفن والتصميم. دمج الفن بعناية في التصميم الداخلي والعمارة هو اللي بيميّز شغلنا.",
+    },
+  },
+  {
+    num: "03",
+    title: { en: "Holistic & Turnkey", ar: "متكامل ومن الألف للياء" },
+    body: {
+      en: "From concept and branding to execution and beyond, we see a project through end to end — so the vision that starts on paper survives all the way to the finished space.",
+      ar: "من الفكرة والهوية لحد التنفيذ وبعده، بنمشي مع المشروع من أوله لآخره — عشان الرؤية اللي بدأت على الورق توصل للمكان النهائي زي ما هي.",
+    },
+  },
+];
 
 /* ------------------------------------------------------------------ About */
 

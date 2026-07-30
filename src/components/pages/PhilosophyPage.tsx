@@ -5,26 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
 import { FadeUp, FadeIn, StaggerChildren, StaggerItem } from "@/components/animations";
-
-const PRINCIPLES = [
-  {
-    num: "01",
-    title: "Create The Vibe First",
-    body: "Before materials or layout, we define the feeling a space must create. Every decision after that serves the vibe — that is what makes a space unforgettable.",
-  },
-  {
-    num: "02",
-    title: "Art & Design As One",
-    body: "We refuse the false line between art and design. The careful integration of art into interiors and architecture is the thing that sets our work apart.",
-  },
-  {
-    num: "03",
-    title: "Holistic & Turnkey",
-    body: "From concept and branding to execution and beyond, we see a project through end to end — so the vision that starts on paper survives all the way to the finished space.",
-  },
-];
+import { useLocale } from "@/i18n/LocaleProvider";
+import { localeHref } from "@/i18n/paths";
+import { PHILOSOPHY, PHILOSOPHY_PRINCIPLES } from "@/i18n/messages";
 
 function HeroParallax() {
+  const locale = useLocale();
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
@@ -40,7 +26,7 @@ function HeroParallax() {
       >
         <Image
           src="/projects/aaly-al-makam/03.jpg"
-          alt="AES interior — Aaly Al Makam"
+          alt={PHILOSOPHY.heroAlt[locale]}
           fill
           priority
           sizes="100vw"
@@ -54,12 +40,15 @@ function HeroParallax() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         >
-          <span className="text-[10px] uppercase tracking-[0.3em] text-primary block mb-6">Our Philosophy</span>
+          <span className="text-[10px] uppercase tracking-[0.3em] text-primary block mb-6">
+            {PHILOSOPHY.heroEyebrow[locale]}
+          </span>
           <h1
             className="font-black uppercase text-foreground leading-[0.88]"
             style={{ fontFamily: "var(--font-barlow), sans-serif", fontSize: "clamp(4rem, 11vw, 12rem)", letterSpacing: "-0.02em" }}
           >
-            Art &<br />Design Are<br /><span className="text-primary">One</span>
+            {PHILOSOPHY.heroLine1[locale]}<br />{PHILOSOPHY.heroLine2[locale]}<br />
+            <span className="text-primary">{PHILOSOPHY.heroLine3[locale]}</span>
           </h1>
         </motion.div>
       </div>
@@ -68,6 +57,7 @@ function HeroParallax() {
 }
 
 export default function PhilosophyPage() {
+  const locale = useLocale();
   return (
     <div className="pt-16">
       <HeroParallax />
@@ -77,10 +67,10 @@ export default function PhilosophyPage() {
         <div className="max-w-screen-xl mx-auto">
           <FadeUp>
             <p
-              className="font-black uppercase text-foreground leading-[0.9]"
+              className="font-black uppercase text-foreground leading-[0.9] rtl:leading-[1.4]"
               style={{ fontFamily: "var(--font-barlow), sans-serif", fontSize: "clamp(2.5rem, 6vw, 6rem)", letterSpacing: "-0.02em" }}
             >
-              "Our design philosophy revolves around the belief that art and design are inextricably linked — and that the careful integration of art into design is what sets us apart."
+              {PHILOSOPHY.quote1[locale]}
             </p>
           </FadeUp>
         </div>
@@ -92,7 +82,7 @@ export default function PhilosophyPage() {
           <FadeIn className="relative min-h-[500px] bg-card overflow-hidden">
             <Image
               src="/projects/ozel/02.jpg"
-              alt="Studio process"
+              alt={PHILOSOPHY.processAlt[locale]}
               fill
               sizes="(max-width:768px) 100vw, 50vw"
               className="object-cover opacity-80"
@@ -100,12 +90,14 @@ export default function PhilosophyPage() {
           </FadeIn>
           <div className="px-8 md:px-14 py-20 flex flex-col justify-center">
             <FadeUp>
-              <span className="text-[10px] uppercase tracking-[0.3em] text-primary block mb-8">How We Work</span>
+              <span className="text-[10px] uppercase tracking-[0.3em] text-primary block mb-8">
+                {PHILOSOPHY.processEyebrow[locale]}
+              </span>
               <p className="text-muted-foreground text-sm leading-loose mb-6 max-w-sm">
-                Our process is not linear and it is not templated. It begins with the question: what does this work need to do? Not what does it need to look like — what does it need to do. Everything else follows from that.
+                {PHILOSOPHY.processBody1[locale]}
               </p>
               <p className="text-muted-foreground text-sm leading-loose max-w-sm">
-                We work closely with clients throughout, not as service providers but as thinking partners. The best outcomes come from genuine collaboration — when both sides bring something the other cannot.
+                {PHILOSOPHY.processBody2[locale]}
               </p>
             </FadeUp>
           </div>
@@ -116,20 +108,22 @@ export default function PhilosophyPage() {
       <section className="border-t border-border px-6 md:px-10 py-24">
         <div className="max-w-screen-xl mx-auto">
           <FadeUp className="mb-14">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-primary block mb-4">How We Think</span>
+            <span className="text-[10px] uppercase tracking-[0.3em] text-primary block mb-4">
+              {PHILOSOPHY.principlesEyebrow[locale]}
+            </span>
             <h2
               className="font-black uppercase text-foreground leading-[0.9]"
               style={{ fontFamily: "var(--font-barlow), sans-serif", fontSize: "clamp(2.5rem, 6vw, 5rem)", letterSpacing: "-0.02em" }}
             >
-              Core Principles
+              {PHILOSOPHY.principlesHeading[locale]}
             </h2>
           </FadeUp>
           <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-px bg-border border border-border">
-            {PRINCIPLES.map((p) => (
+            {PHILOSOPHY_PRINCIPLES.map((p) => (
               <StaggerItem key={p.num}>
                 <div className="group relative h-full overflow-hidden bg-background p-8 md:p-10 transition-colors duration-300 hover:bg-card">
                   <span
-                    className="pointer-events-none absolute -top-4 right-2 select-none font-black text-foreground/[0.05] transition-colors duration-300 group-hover:text-primary/10"
+                    className="pointer-events-none absolute -top-4 end-2 select-none font-black text-foreground/[0.05] transition-colors duration-300 group-hover:text-primary/10"
                     style={{ fontFamily: "var(--font-barlow), sans-serif", fontSize: "clamp(6rem, 10vw, 9rem)", lineHeight: 1 }}
                   >
                     {p.num}
@@ -141,9 +135,9 @@ export default function PhilosophyPage() {
                       className="font-black uppercase text-foreground mb-4"
                       style={{ fontFamily: "var(--font-barlow), sans-serif", fontSize: "clamp(1.6rem, 2.5vw, 2.2rem)", letterSpacing: "-0.01em" }}
                     >
-                      {p.title}
+                      {p.title[locale]}
                     </h3>
-                    <p className="text-muted-foreground text-sm leading-loose">{p.body}</p>
+                    <p className="text-muted-foreground text-sm leading-loose">{p.body[locale]}</p>
                   </div>
                 </div>
               </StaggerItem>
@@ -157,15 +151,15 @@ export default function PhilosophyPage() {
         <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <FadeUp>
             <p
-              className="font-black uppercase text-primary leading-[0.9]"
+              className="font-black uppercase text-primary leading-[0.9] rtl:leading-[1.4]"
               style={{ fontFamily: "var(--font-barlow), sans-serif", fontSize: "clamp(2.5rem, 5vw, 5rem)", letterSpacing: "-0.02em" }}
             >
-              "The connection between marketing, branding, and interior design isn't just an advantage — it's essential."
+              {PHILOSOPHY.quote2[locale]}
             </p>
           </FadeUp>
           <FadeUp delay={0.15}>
             <p className="text-muted-foreground text-sm leading-loose">
-              A space without distinctive vibes loses much of its potential, even with stunning interior design. We design the vibe first — then everything serves it.
+              {PHILOSOPHY.quote2Support[locale]}
             </p>
           </FadeUp>
         </div>
@@ -179,15 +173,16 @@ export default function PhilosophyPage() {
               className="font-black uppercase text-foreground leading-[0.9]"
               style={{ fontFamily: "var(--font-barlow), sans-serif", fontSize: "clamp(2.5rem, 6vw, 5rem)", letterSpacing: "-0.02em" }}
             >
-              Work With Us
+              {PHILOSOPHY.ctaHeading[locale]}
             </h2>
           </FadeUp>
           <FadeUp delay={0.1}>
             <Link
-              href="/contact"
+              href={localeHref("/contact", locale)}
               className="inline-flex items-center gap-3 bg-primary text-background text-xs uppercase tracking-[0.2em] px-8 py-4 font-bold hover:bg-foreground hover:text-background transition-colors duration-200"
             >
-              Start a Conversation <ArrowUpRight size={14} />
+              {PHILOSOPHY.ctaButton[locale]}{" "}
+              <ArrowUpRight size={14} className="rtl:-scale-x-100" />
             </Link>
           </FadeUp>
         </div>

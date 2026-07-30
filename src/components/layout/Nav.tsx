@@ -6,7 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { SITE } from "@/data/site";
 import { notoKufi } from "@/i18n/fonts";
-import { localeFromPathname } from "@/i18n/paths";
+import { localeFromPathname, localeHref } from "@/i18n/paths";
 import { NAV, NAV_ORDER } from "@/i18n/messages";
 import { DIR, HTML_LANG } from "@/i18n/locale";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -24,6 +24,9 @@ export default function Nav() {
    */
   const locale = localeFromPathname(pathname);
   const isAr = locale === "ar";
+
+  /** Keeps the visitor inside their language while browsing. */
+  const navHref = (to: string) => localeHref(to, locale);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -56,9 +59,9 @@ export default function Nav() {
           {SITE.nav.map((link, i) => (
             <li key={link.label}>
               <Link
-                href={link.to}
+                href={navHref(link.to)}
                 className={`text-xs uppercase tracking-[0.15em] transition-colors duration-200 ${
-                  pathname === link.to ? "text-primary" : "text-muted-foreground hover:text-foreground"
+                  pathname === navHref(link.to) ? "text-primary" : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {NAV[NAV_ORDER[i]][locale]}
@@ -70,7 +73,7 @@ export default function Nav() {
         <div className="flex items-center gap-4">
           <LanguageSwitcher />
           <Link
-            href="/contact"
+            href={navHref("/contact")}
             className="hidden md:inline-flex items-center gap-1.5 text-xs uppercase tracking-[0.15em] border border-primary text-primary px-4 py-2 hover:bg-primary hover:text-background transition-all duration-200"
           >
             {NAV.enquire[locale]}
@@ -91,7 +94,7 @@ export default function Nav() {
             {SITE.nav.map((link, i) => (
               <li key={link.label}>
                 <Link
-                  href={link.to}
+                  href={navHref(link.to)}
                   onClick={() => setMenuOpen(false)}
                   className="text-2xl uppercase font-black tracking-tight text-foreground hover:text-primary transition-colors"
                   style={{ fontFamily: "var(--font-barlow), sans-serif" }}

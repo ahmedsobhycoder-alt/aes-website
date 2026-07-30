@@ -8,7 +8,7 @@ export const SITE = {
     phone: "+20 100 408 5006",
     phoneHref: "+201004085006",
     whatsapp: "201004085006",
-    email: "info@aes-designstudio.com",
+    email: "contact@aes-designstudio.com",
     domain: "aes-designstudio.com",
     location: "Cairo, Egypt",
   },

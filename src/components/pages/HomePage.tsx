@@ -298,20 +298,19 @@ export default function HomePage() {
           <FadeUp delay={0.2} className="md:col-span-12">
             <div
               ref={statsRef}
-              className="md:col-span-12 flex w-full flex-col md:flex-row mdmd:items-center md:justify-center md:gap-20 "
+              className="md:col-span-12 flex w-full flex-col md:flex-col mdmd:items-center md:justify-center md:gap-20 "
             >
-              <div className="md:flex-col md:items-center md:justify-center ">
+              <div  className="w-full basis-full shrink-0">
                 <p
-                  className="text-[100px] font-black text-primary text-center"
+                  className="text-[100px] font-black text-primary  text-center"
                   style={{ fontFamily: "var(--font-barlow), sans-serif" }}
                 >
                   {HOME.est2020[locale]}
                 </p>
-                <p className="text-xs text-center uppercase tracking-[0.2em] text-muted-foreground mt-1">
-                  {HOME.since2013[locale]}
-                </p>
+    
               </div>
-              <div>
+         <div className="md:flex-row">
+               <div >
                 <p
                   className="text-[100px]  font-black text-center text-primary"
                   style={{ fontFamily: "var(--font-barlow), sans-serif" }}
@@ -333,6 +332,7 @@ export default function HomePage() {
                   {HOME.industriesExecuted[locale]}
                 </p>
               </div>
+         </div>
             </div>
           </FadeUp>
           <FadeUp
@@ -378,7 +378,7 @@ export default function HomePage() {
               {CLIENTS.map((c, i) => (
                 <li
                   key={c.id}
-                  className="border-b border-e border-border bg-muted"
+                  className="border-b border-e border-border "
                 >
                   <ClientCell client={c} index={i} />
                 </li>

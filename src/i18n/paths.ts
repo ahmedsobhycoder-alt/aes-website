@@ -38,10 +38,29 @@ export function localizedPath(canonical: string, locale: Locale): string {
  * linking to an unbuilt /ar/<path> would 404 on a static host. Add entries here
  * as each Arabic route ships.
  */
-export const AR_AVAILABLE: ReadonlySet<string> = new Set(["/", "/about"]);
+export const AR_AVAILABLE: ReadonlySet<string> = new Set([
+  "/",
+  "/about",
+  "/philosophy",
+  "/contact",
+  "/work",
+  "/blog",
+  "/services",
+]);
 
 export function hasArabic(canonical: string): boolean {
   return AR_AVAILABLE.has(canonical);
+}
+
+/**
+ * Internal link that keeps the visitor in their current language.
+ *
+ * Returns the /ar/* route when one exists, otherwise the English route — an
+ * unbuilt /ar/* path would be a hard 404 on a static host. Used by the navbar
+ * and by in-page links so the rule lives in exactly one place.
+ */
+export function localeHref(to: string, locale: Locale): string {
+  return locale === "ar" && hasArabic(to) ? localizedPath(to, "ar") : to;
 }
 
 /**
