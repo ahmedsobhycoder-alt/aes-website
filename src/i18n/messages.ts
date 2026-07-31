@@ -180,53 +180,93 @@ export const PROJECT_COPY: Record<
 > = {
   ozel: {
     title: { en: "Ozel", ar: "أوزيل" },
-    category: { en: "Hospitality & F&B", ar: "ضيافة ومطاعم" },
-    role: {
-      en: "Art Direction · Interior Design · Execution",
-      ar: "إدارة فنية · تصميم داخلي · تنفيذ",
-    },
+    category: { en: "Commercial", ar: "تجاري" },
+    role: { en: "Art Direction · Interior Design · Execution", ar: "إدارة فنية · تصميم داخلي · تنفيذ" },
   },
   nuwa: {
     title: { en: "Nuwa", ar: "نوا" },
-    category: { en: "Hospitality & F&B", ar: "ضيافة ومطاعم" },
-    role: {
-      en: "Art Direction · Interior Design · Execution",
-      ar: "إدارة فنية · تصميم داخلي · تنفيذ",
-    },
+    category: { en: "Commercial", ar: "تجاري" },
+    role: { en: "Art Direction · Interior Design · Execution", ar: "إدارة فنية · تصميم داخلي · تنفيذ" },
   },
-  "aaly-al-makam": {
-    title: { en: "Aaly Al Makam", ar: "عالي المقام" },
-    category: { en: "Hospitality & F&B", ar: "ضيافة ومطاعم" },
-    role: {
-      en: "Art Direction · Interior Design",
-      ar: "إدارة فنية · تصميم داخلي",
-    },
+  "aaly-elmaqam": {
+    title: { en: "Aaly Elmaqam", ar: "عالي المقام" },
+    category: { en: "Commercial", ar: "تجاري" },
+    role: { en: "Art Direction · Interior Design", ar: "إدارة فنية · تصميم داخلي" },
   },
-  rixance: {
-    title: { en: "Rixance", ar: "ريكسانس" },
-    category: { en: "Branding", ar: "هوية تجارية" },
-    role: {
-      en: "Art Direction · Branding · Retail Concept",
-      ar: "إدارة فنية · هوية تجارية · مفهوم تجاري",
-    },
-  },
-  "magaz-clinic": {
-    title: { en: "Magaz Clinic", ar: "عيادة مچاز" },
+  "majaz-clinic": {
+    title: { en: "Majaz Clinic", ar: "عيادة مجاز" },
     category: { en: "Commercial", ar: "تجاري" },
     role: { en: "Interior Design · Execution", ar: "تصميم داخلي · تنفيذ" },
   },
-  "salon-ali-yehia": {
-    title: { en: "Salon Ali Yehia", ar: "صالون علي يحيى" },
+  "ali-yehia-salon": {
+    title: { en: "Ali Yehia Salon", ar: "صالون علي يحيى" },
     category: { en: "Commercial", ar: "تجاري" },
     role: { en: "Interior Design · Art Direction", ar: "تصميم داخلي · إدارة فنية" },
   },
   "hyde-park": {
     title: { en: "Hyde Park", ar: "هايد بارك" },
     category: { en: "Residential", ar: "سكني" },
-    role: {
-      en: "Interior Design · Art Direction · Turnkey Execution",
-      ar: "تصميم داخلي · إدارة فنية · تنفيذ متكامل",
-    },
+    role: { en: "Interior Design · Art Direction · Turnkey Execution", ar: "تصميم داخلي · إدارة فنية · تنفيذ متكامل" },
+  },
+  blues: {
+    title: { en: "Blues", ar: "بلوز" },
+    category: { en: "Commercial", ar: "تجاري" },
+    role: { en: "Art Direction · Interior Design", ar: "إدارة فنية · تصميم داخلي" },
+  },
+  sababa: {
+    title: { en: "Sababa", ar: "سبابا" },
+    category: { en: "Commercial", ar: "تجاري" },
+    role: { en: "Art Direction · Interior Design", ar: "إدارة فنية · تصميم داخلي" },
+  },
+  savoy: {
+    title: { en: "Savoy", ar: "سافوي" },
+    category: { en: "Commercial", ar: "تجاري" },
+    role: { en: "Art Direction · Interior Design", ar: "إدارة فنية · تصميم داخلي" },
+  },
+  "antika-beirut": {
+    title: { en: "Antika Beirut", ar: "أنتيكا بيروت" },
+    category: { en: "Commercial", ar: "تجاري" },
+    role: { en: "Art Direction · Interior Design", ar: "إدارة فنية · تصميم داخلي" },
+  },
+  "cassandra-food-court": {
+    title: { en: "Cassandra Food Court", ar: "كاساندرا فود كورت" },
+    category: { en: "Commercial", ar: "تجاري" },
+    role: { en: "Art Direction · Interior Design", ar: "إدارة فنية · تصميم داخلي" },
+  },
+  "grand-technology-office": {
+    title: { en: "Grand Technology Office Space", ar: "مكتب جراند تكنولوجي" },
+    category: { en: "Commercial", ar: "تجاري" },
+    role: { en: "Art Direction · Interior Design", ar: "إدارة فنية · تصميم داخلي" },
+  },
+  "big-pappy": {
+    title: { en: "Big Pappy", ar: "بيج بابي" },
+    category: { en: "Commercial", ar: "تجاري" },
+    role: { en: "Art Direction · Interior Design", ar: "إدارة فنية · تصميم داخلي" },
+  },
+  "bad-ziggy": {
+    title: { en: "Bad Ziggy", ar: "باد زيجي" },
+    category: { en: "Commercial", ar: "تجاري" },
+    role: { en: "Art Direction · Interior Design", ar: "إدارة فنية · تصميم داخلي" },
+  },
+  nuera: {
+    title: { en: "Nuera", ar: "نويرا" },
+    category: { en: "Commercial", ar: "تجاري" },
+    role: { en: "Art Direction · Interior Design", ar: "إدارة فنية · تصميم داخلي" },
+  },
+  "hot-office": {
+    title: { en: "Hot Office", ar: "هوت أوفيس" },
+    category: { en: "Commercial", ar: "تجاري" },
+    role: { en: "Art Direction · Interior Design", ar: "إدارة فنية · تصميم داخلي" },
+  },
+  lalique: {
+    title: { en: "Lalique", ar: "لاليك" },
+    category: { en: "Commercial", ar: "تجاري" },
+    role: { en: "Art Direction · Interior Design", ar: "إدارة فنية · تصميم داخلي" },
+  },
+  rixance: {
+    title: { en: "Rixance", ar: "ريكسانس" },
+    category: { en: "Commercial", ar: "تجاري" },
+    role: { en: "Art Direction · Branding · Retail Concept", ar: "إدارة فنية · هوية تجارية · مفهوم تجاري" },
   },
 };
 
@@ -242,6 +282,33 @@ export const CLIENT_NAMES: Record<number, I18nText> = {
   8: { en: "Ozel", ar: "أوزيل" },
   9: { en: "MinaMark Resort & Spa", ar: "مينامارك ريزورت آند سبا" },
 };
+
+/* ----------------------------------------------------------------- Footer */
+
+/**
+ * The footer keeps its own link labels — they read longer than the navbar's
+ * ("About Us" vs "About"), so they are deliberately not shared with NAV.
+ */
+export const FOOTER = {
+  companyHeading: { en: "Company", ar: "الاستوديو" },
+  contactHeading: { en: "Contact", ar: "للتواصل" },
+  followHeading: { en: "Follow", ar: "تابعنا" },
+
+  aboutUs: { en: "About Us", ar: "عن الاستوديو" },
+  ourServices: { en: "Our Services", ar: "خدماتنا" },
+  work: { en: "Work", ar: "أعمالنا" },
+  blog: { en: "Blog", ar: "المدونة" },
+  contact: { en: "Contact", ar: "تواصل معانا" },
+
+  copyright: {
+    en: "© 2026 AES — Ayman Ehab Studio. All rights reserved.",
+    ar: "© 2026 AES — استوديو أيمن وإيهاب. كل الحقوق محفوظة.",
+  },
+  legal: {
+    en: "Privacy Policy · Terms of Use",
+    ar: "سياسة الخصوصية · شروط الاستخدام",
+  },
+} satisfies Record<string, I18nText>;
 
 /* --------------------------------------------------------------- Services */
 
@@ -390,9 +457,8 @@ export const WORK = {
  */
 export const WORK_TAGS: { value: string; label: I18nText }[] = [
   { value: "All", label: { en: "All", ar: "الكل" } },
-  { value: "Hospitality & F&B", label: { en: "Hospitality & F&B", ar: "ضيافة ومطاعم" } },
   { value: "Commercial", label: { en: "Commercial", ar: "تجاري" } },
-  { value: "Branding", label: { en: "Branding", ar: "هوية تجارية" } },
+  { value: "Residential", label: { en: "Residential", ar: "سكني" } },
 ];
 
 /* ---------------------------------------------------------------- Contact */

@@ -47,12 +47,12 @@ const heroItem = {
 
 /** Order must stay in sync with HERO_SLIDE_LABELS in @/i18n/messages. */
 const HERO_SLIDES = [
-  { src: "projects/ayman-ehap/ayman-ehap-1.png", label: "founders" },
+  { src: "/projects/ayman-ehap/01.png", label: "founders" },
 
   { src: "/projects/aaly-al-makam/01.jpg", label: "Aaly Al Makam" },
   { src: "/projects/ozel/12.jpg", label: "Ozel" },
   { src: "/projects/nuwa/01.jpg", label: "Nuwa" },
-  { src: "/projects/hyde-park/hydepark1.jpg", label: "hyde park" },
+  { src: "/projects/hyde-park/47.jpg", label: "hyde park" },
 ];
 
 function HeroSlideshow() {
@@ -561,7 +561,6 @@ export default function HomePage() {
                       </h3>
                       <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-1">
                         {PROJECT_COPY[p.slug]?.category[locale] ?? p.category}
-                        {p.year ? ` · ${p.year}` : ""}
                       </p>
                     </div>
                     <ArrowUpRight

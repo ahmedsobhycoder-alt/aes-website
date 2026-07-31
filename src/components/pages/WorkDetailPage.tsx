@@ -57,7 +57,6 @@ export default function WorkDetailPage({ slug }: { slug: string }) {
             { label: "Client", value: project.client },
             { label: "Category", value: project.category },
             { label: "Role", value: project.role },
-            { label: "Year", value: project.year },
           ].map((item) => (
             <div key={item.label} className="px-6 first:pl-0">
               <p className="text-[10px] uppercase tracking-[0.3em] text-primary mb-1">{item.label}</p>
@@ -174,7 +173,7 @@ export default function WorkDetailPage({ slug }: { slug: string }) {
               >
                 {next.title}
               </h3>
-              <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-2">{next.category} · {next.year}</p>
+              <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground mt-2">{next.category}</p>
             </div>
             <ArrowRight size={32} className="text-muted-foreground group-hover:text-primary transition-colors duration-200 flex-shrink-0" />
           </div>
