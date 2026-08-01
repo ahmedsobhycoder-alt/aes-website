@@ -268,6 +268,11 @@ export const PROJECT_COPY: Record<
     category: { en: "Commercial", ar: "تجاري" },
     role: { en: "Art Direction · Branding · Retail Concept", ar: "إدارة فنية · هوية تجارية · مفهوم تجاري" },
   },
+  "engineers-apartment": {
+    title: { en: "Engineer's Apartment", ar: "شقة المهندس" },
+    category: { en: "Residential", ar: "سكني" },
+    role: { en: "Art Direction · Interior Design", ar: "إدارة فنية · تصميم داخلي" },
+  },
 };
 
 /** Keyed by Client.id in src/data/clients.ts. */
@@ -290,6 +295,13 @@ export const CLIENT_NAMES: Record<number, I18nText> = {
  * ("About Us" vs "About"), so they are deliberately not shared with NAV.
  */
 export const FOOTER = {
+  findUsHeading: { en: "Find Us", ar: "مكاننا" },
+  mapTitle: {
+    en: "Map showing the AES studio in Fifth Settlement, Cairo",
+    ar: "خريطة توضح مكان استوديو AES في التجمع الخامس، القاهرة",
+  },
+  openInMaps: { en: "Open in Google Maps", ar: "افتح في خرائط جوجل" },
+  getDirections: { en: "Get Directions", ar: "الاتجاهات" },
   companyHeading: { en: "Company", ar: "الاستوديو" },
   contactHeading: { en: "Contact", ar: "للتواصل" },
   followHeading: { en: "Follow", ar: "تابعنا" },
@@ -494,20 +506,32 @@ export const CONTACT = {
   messageLabel: { en: "Message", ar: "رسالتك" },
   messagePlaceholder: { en: "Tell us about your project", ar: "احكيلنا عن مشروعك" },
   submit: { en: "Send Enquiry", ar: "ابعت طلبك" },
+  sending: { en: "Sending…", ar: "بنبعت…" },
 
-  // ---- Post-submit (mailto handoff) ----
-  sentEyebrow: { en: "Almost There", ar: "فاضل خطوة" },
-  sentHeading: { en: "Check Your Email App", ar: "افتح تطبيق الإيميل" },
+  // ---- Success ----
+  // The enquiry is delivered server-side now, so this states delivery as fact
+  // rather than asking the visitor to finish the job in their mail client.
+  sentEyebrow: { en: "Message Sent", ar: "الرسالة اتبعتت" },
+  sentHeading: { en: "Thank You", ar: "شكراً ليك" },
   sentBody: {
-    en: "Your email app should have opened with the enquiry ready to send. Press send there and we'll be in touch within 2 business days.",
-    ar: "تطبيق الإيميل المفروض فتح ومعاه طلبك جاهز للإرسال. اضغط إرسال من هناك وهنرد عليك خلال يومين عمل.",
+    en: "We've received your enquiry and will be in touch within 2 business days.",
+    ar: "وصلنا طلبك وهنتواصل معاك خلال يومين عمل.",
   },
-  fallbackLead: {
-    en: "Nothing opened? Use the link below, or email us directly at",
-    ar: "مافتحش حاجة؟ استخدم اللينك تحت، أو ابعتلنا على طول على",
+  another: { en: "Send Another Enquiry", ar: "ابعت طلب تاني" },
+
+  // ---- Failure ----
+  errorEyebrow: { en: "Didn't Send", ar: "مااتبعتش" },
+  errorHeading: { en: "Something Went Wrong", ar: "في حاجة غلط حصلت" },
+  errorBody: {
+    en: "We couldn't deliver your enquiry just now. Your message is still in the form — try again, or reach us directly.",
+    ar: "مقدرناش نبعت طلبك دلوقتي. رسالتك لسه موجودة في الفورم — جرّب تاني، أو تواصل معانا على طول.",
   },
-  reopen: { en: "Open Email App Again", ar: "افتح تطبيق الإيميل تاني" },
-  edit: { en: "Edit Enquiry", ar: "عدّل الطلب" },
+  retry: { en: "Try Again", ar: "جرّب تاني" },
+  orEmailDirect: {
+    en: "Or email us directly at",
+    ar: "أو ابعتلنا على طول على",
+  },
+  openMailApp: { en: "Open Email App", ar: "افتح تطبيق الإيميل" },
 } satisfies Record<string, I18nText>;
 
 /**
@@ -599,6 +623,7 @@ export const PHILOSOPHY_PRINCIPLES: { num: string; title: I18nText; body: I18nTe
 /* ------------------------------------------------------------------ About */
 
 export const ABOUT = {
+  viewProfile: { en: "View Profile", ar: "شوف الملف" },
   heroLine1: { en: "About", ar: "عن" },
   heroLine2: { en: "AES", ar: "AES" },
   heroAlt: {
@@ -691,3 +716,125 @@ export const ABOUT_FOUNDERS: { name: I18nText; role: I18nText }[] = [
     },
   },
 ];
+
+/**
+ * Copy that appears only inside the JSON-LD payload, never on screen.
+ *
+ * Kept here rather than in `schema.ts` so every translated string in the project
+ * lives in one file and the `satisfies` guard catches a missing `ar` at compile
+ * time — the same rule as the visible UI.
+ */
+export const STUDIO_SCHEMA = {
+  name: {
+    en: "AES — Ayman Ehab Studio",
+    ar: "AES — استوديو أيمن وإيهاب",
+  },
+  description: {
+    en: "Interior design, architecture and art direction studio in Cairo, Egypt. AES designs and delivers restaurants, food and beverage outlets, retail, offices and private residences turnkey.",
+    ar: "استوديو تصميم داخلي وعمارة وإدارة فنية في القاهرة، مصر. AES بتصمم وتنفّذ المطاعم والكافيهات والمحلات والمكاتب والفيلات والوحدات السكنية تسليم مفتاح.",
+  },
+  catalogName: {
+    en: "Design & Build Services",
+    ar: "خدمات التصميم والتنفيذ",
+  },
+  founderTitle: {
+    en: "Art Director & Interior Designer",
+    ar: "مدير فني ومصمم داخلي",
+  },
+} satisfies Record<string, I18nText>;
+
+/** `knowsAbout` — the studio's declared areas of expertise, per locale. */
+export const STUDIO_EXPERTISE: Record<"en" | "ar", string[]> = {
+  en: [
+    "Interior Design",
+    "Architecture",
+    "Art Direction",
+    "Food and Beverage Design",
+    "Restaurant Interior Design",
+    "Brand Experience",
+    "Turnkey Execution",
+  ],
+  ar: [
+    "التصميم الداخلي",
+    "العمارة",
+    "الإدارة الفنية",
+    "تصميم المطاعم والكافيهات",
+    "تصميم مطاعم داخلي",
+    "تجربة العلامة",
+    "التنفيذ تسليم مفتاح",
+  ],
+};
+
+/** Founder names — transliterated for the Arabic payload. */
+export const STUDIO_FOUNDERS: Record<"en" | "ar", [string, string]> = {
+  en: ["Ayman Sobhy", "Ehab Sobhy"],
+  ar: ["أيمن صبحي", "إيهاب صبحي"],
+};
+
+/** Place names used by `areaServed`. */
+export const STUDIO_AREAS = {
+  egypt: { en: "Egypt", ar: "مصر" },
+  saudi: { en: "Saudi Arabia", ar: "السعودية" },
+  mena: { en: "Middle East and North Africa", ar: "الشرق الأوسط وشمال أفريقيا" },
+} satisfies Record<string, I18nText>;
+
+/** Address parts that genuinely differ by script. */
+export const STUDIO_ADDRESS = {
+  street: {
+    en: "Villa 18, Aly Shaarawy, Narges 5, Fifth Settlement",
+    // Western digits, per the numeral convention at the top of this file — and
+    // so the Arabic address still matches the English one for Google Business
+    // Profile reconciliation.
+    ar: "فيلا 18، علي شعراوي، النرجس 5، التجمع الخامس",
+  },
+  city: { en: "Cairo", ar: "القاهرة" },
+  region: { en: "Cairo Governorate", ar: "محافظة القاهرة" },
+} satisfies Record<string, I18nText>;
+
+/**
+ * The names people actually search for. Without these the entity is not
+ * associated with "ayman and ehab" at all. The Arabic list keeps the Latin
+ * forms too — Egyptian users routinely type the brand in either script.
+ */
+export const STUDIO_ALT_NAMES: Record<"en" | "ar", string[]> = {
+  en: ["AES", "Ayman & Ehab", "Ayman and Ehab", "Ayman & Ehab Studio", "AES Design Studio"],
+  ar: [
+    "AES",
+    "Ayman & Ehab",
+    "Ayman and Ehab",
+    "أيمن وإيهاب",
+    "استوديو أيمن وإيهاب",
+    "ايه اي اس",
+  ],
+};
+
+/* -------------------------------------------------------------- Lightbox */
+
+export const LIGHTBOX = {
+  dialogLabel: { en: "Image viewer", ar: "عارض الصور" },
+  close: { en: "Close image viewer", ar: "اقفل عارض الصور" },
+  next: { en: "Next image", ar: "الصورة اللي بعدها" },
+  previous: { en: "Previous image", ar: "الصورة اللي قبلها" },
+  expand: { en: "View full screen", ar: "اعرض ملء الشاشة" },
+} satisfies Record<string, I18nText>;
+
+/* -------------------------------------------------------------- Founders */
+
+export const FOUNDER_PAGE = {
+  eyebrow: { en: "Co-Founder", ar: "شريك مؤسس" },
+  aboutStudioHeading: { en: "At AES", ar: "في AES" },
+  aboutStudioBody: {
+    en: "AES is an art direction, interior design and architecture studio in Cairo, founded in 2020. The studio works across food and beverage, retail, workplace and private residential projects, taking each from concept and art direction through documentation and on-site execution.",
+    ar: "AES استوديو إدارة فنية وتصميم داخلي وعمارة في القاهرة، اتأسس سنة 2020. الاستوديو بيشتغل على مشاريع المطاعم والكافيهات والريتيل والمكاتب والسكني، من الفكرة والإدارة الفنية لحد التنفيذ في الموقع.",
+  },
+  disciplinesHeading: { en: "Disciplines", ar: "التخصصات" },
+  projectsHeading: { en: "Selected AES Projects", ar: "مختارات من مشاريع AES" },
+  projectsNote: {
+    en: "Projects delivered by the AES studio.",
+    ar: "مشاريع نفّذها استوديو AES.",
+  },
+  otherFounder: { en: "The Other Co-Founder", ar: "الشريك المؤسس التاني" },
+  viewAllWork: { en: "View All Work", ar: "شوف كل الأعمال" },
+  startProject: { en: "Start a Project", ar: "ابدأ مشروعك" },
+  backToAbout: { en: "Back to About AES", ar: "ارجع لصفحة عن AES" },
+} satisfies Record<string, I18nText>;

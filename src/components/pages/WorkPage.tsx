@@ -1,12 +1,13 @@
 "use client";
 import { useState } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Maximize2 } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
+import ShimmerImage from "@/components/ShimmerImage";
 import { FadeUp } from "@/components/animations";
 import { PROJECTS } from "@/data/projects";
 import { useLocale } from "@/i18n/LocaleProvider";
-import { PROJECT_COPY, WORK, WORK_TAGS } from "@/i18n/messages";
+import { LIGHTBOX, PROJECT_COPY, WORK, WORK_TAGS } from "@/i18n/messages";
+import Lightbox, { type LightboxImage } from "@/components/Lightbox";
 
 export default function WorkPage() {
   const locale = useLocale();
@@ -14,6 +15,10 @@ export default function WorkPage() {
   // keeps matching the raw strings in Project.tags.
   const [active, setActive] = useState("All");
   const filtered = active === "All" ? PROJECTS : PROJECTS.filter((p) => p.tags.includes(active));
+
+  // Each row opens its OWN project's gallery, so the viewer carries the image
+  // set with it rather than reading from a single shared list.
+  const [zoom, setZoom] = useState<{ images: LightboxImage[]; index: number } | null>(null);
 
   return (
     <div className="pt-16">
@@ -68,13 +73,15 @@ export default function WorkPage() {
             const title = copy?.title[locale] ?? p.title;
             return (
               <FadeUp key={p.slug}>
-                <Link
-                  href={`/work/${p.slug}`}
-                  className="group grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 items-center border-t border-border py-10 md:py-16"
-                >
+                {/* The row is a div, not a Link. The Link on the title stretches
+                    over the whole row via after:inset-0, which keeps the entire
+                    card clickable while letting the expand button sit OUTSIDE the
+                    anchor — a <button> nested in an <a> is invalid HTML and gives
+                    screen readers two overlapping controls. */}
+                <div className="group relative grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-10 items-center border-t border-border py-10 md:py-16">
                   <div className={`md:col-span-7 ${flip ? "md:order-2" : ""}`}>
                     <div className="relative aspect-[16/10] overflow-hidden bg-card">
-                      <Image
+                      <ShimmerImage
                         src={p.cover}
                         alt={locale === "ar" ? title : p.alt}
                         fill
@@ -82,6 +89,20 @@ export default function WorkPage() {
                         className="object-cover saturate-[0.7] brightness-90 transition-all duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:saturate-100 group-hover:brightness-100 group-hover:scale-[1.04]"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent opacity-70 transition-opacity duration-700 group-hover:opacity-25" />
+
+                      {/* z-20 puts this above the stretched link's z-10 overlay,
+                          so clicking it opens the viewer instead of navigating.
+                          Always visible on touch, where there is no hover. */}
+                      {p.gallery.length > 0 && (
+                        <button
+                          type="button"
+                          onClick={() => setZoom({ images: p.gallery, index: 0 })}
+                          aria-label={`${LIGHTBOX.expand[locale]} — ${title}`}
+                          className="absolute end-3 top-3 z-20 border border-foreground/25 bg-background/50 p-2.5 text-foreground/80 backdrop-blur-sm transition-all hover:border-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary md:opacity-0 md:group-hover:opacity-100 md:focus-visible:opacity-100"
+                        >
+                          <Maximize2 size={16} />
+                        </button>
+                      )}
                     </div>
                   </div>
                   <div className={`md:col-span-5 flex flex-col ${flip ? "md:order-1 md:pe-6" : "md:ps-6"}`}>
@@ -96,7 +117,16 @@ export default function WorkPage() {
                       className="font-black uppercase text-foreground leading-[0.9] rtl:leading-[1.3] transition-colors duration-300 group-hover:text-primary"
                       style={{ fontFamily: "var(--font-barlow), sans-serif", fontSize: "clamp(2.5rem, 5vw, 4.5rem)", letterSpacing: "-0.02em" }}
                     >
-                      {title}
+                      {/* after:inset-0 stretches the hit area across the whole
+                          row. The link text stays the project title, so the
+                          accessible name and the crawlable anchor text are both
+                          meaningful rather than a generic "View Project". */}
+                      <Link
+                        href={`/work/${p.slug}`}
+                        className="after:absolute after:inset-0 after:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                      >
+                        {title}
+                      </Link>
                     </h2>
                     <p className="text-muted-foreground text-sm leading-relaxed mt-4 max-w-sm">
                       {copy?.role[locale] ?? p.role}
@@ -109,7 +139,7 @@ export default function WorkPage() {
                       <ArrowUpRight size={14} className="text-primary transition-transform duration-300 rtl:-scale-x-100 group-hover:translate-x-1 group-hover:-translate-y-1" />
                     </span>
                   </div>
-                </Link>
+                </div>
               </FadeUp>
             );
           })}
@@ -121,6 +151,13 @@ export default function WorkPage() {
         </div>
       </section>
       <div className="border-t border-border" />
+
+      <Lightbox
+        images={zoom?.images ?? []}
+        index={zoom?.index ?? null}
+        onIndexChange={(i) => setZoom((z) => (z ? { ...z, index: i } : z))}
+        onClose={() => setZoom(null)}
+      />
     </div>
   );
 }

@@ -1,10 +1,14 @@
 "use client";
 import { useRef } from "react";
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import ShimmerImage from "@/components/ShimmerImage";
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
 import { FadeUp, FadeIn, StaggerChildren, StaggerItem } from "@/components/animations";
 import { SITE } from "@/data/site";
+import { FOUNDERS } from "@/data/founders";
 import { useLocale } from "@/i18n/LocaleProvider";
+import { localeHref } from "@/i18n/paths";
 import { ABOUT, ABOUT_FOUNDERS, ABOUT_STATS, VALUES } from "@/i18n/messages";
 
 function HeroParallax() {
@@ -22,7 +26,7 @@ function HeroParallax() {
         transition={{ duration: 1.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         className="absolute inset-0 h-[130%]"
       >
-        <Image
+        <ShimmerImage
           src="/projects/aaly-al-makam/06.jpg"
           alt={ABOUT.heroAlt[locale]}
           fill
@@ -62,7 +66,7 @@ export default function AboutPage() {
           <div className="mt-10 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-center">
             <FadeIn className="md:col-span-5">
               <div className="group relative aspect-[4/5] overflow-hidden bg-card">
-                <Image
+                <ShimmerImage
                   src="/projects/ozel/05.jpg"
                   alt={ABOUT.storyAlt[locale]}
                   fill
@@ -123,19 +127,40 @@ export default function AboutPage() {
             <span className="text-[10px] uppercase tracking-[0.3em] text-primary">{ABOUT.foundersEyebrow[locale]}</span>
           </FadeUp>
           <StaggerChildren className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border">
-            {ABOUT_FOUNDERS.map((founder) => (
-              <StaggerItem key={founder.name.en}>
-                <div className="bg-background h-full p-10 md:p-14 flex flex-col justify-center">
+            {ABOUT_FOUNDERS.map((founder) => {
+              // Matched by name so the two lists cannot silently drift apart;
+              // an unmatched founder simply renders unlinked rather than 404ing.
+              const profile = FOUNDERS.find((f) => f.name.en === founder.name.en);
+              const body = (
+                <>
                   <p
-                    className="font-black uppercase text-foreground leading-[0.9] rtl:leading-[1.35]"
+                    className="font-black uppercase text-foreground leading-[0.9] rtl:leading-[1.35] transition-colors group-hover:text-primary"
                     style={{ fontFamily: "var(--font-barlow), sans-serif", fontSize: "clamp(2.2rem, 4vw, 3.5rem)", letterSpacing: "-0.02em" }}
                   >
                     {founder.name[locale]}
                   </p>
                   <p className="text-[10px] uppercase tracking-[0.2em] text-primary mt-4">{founder.role[locale]}</p>
-                </div>
-              </StaggerItem>
-            ))}
+                </>
+              );
+              return (
+                <StaggerItem key={founder.name.en}>
+                  {profile ? (
+                    <Link
+                      href={localeHref(`/founders/${profile.slug}`, locale)}
+                      className="group bg-background h-full p-10 md:p-14 flex flex-col justify-center"
+                    >
+                      {body}
+                      <span className="mt-6 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.2em] text-muted-foreground group-hover:text-foreground transition-colors">
+                        {ABOUT.viewProfile[locale]}
+                        <ArrowUpRight size={12} className="rtl:-scale-x-100" />
+                      </span>
+                    </Link>
+                  ) : (
+                    <div className="bg-background h-full p-10 md:p-14 flex flex-col justify-center">{body}</div>
+                  )}
+                </StaggerItem>
+              );
+            })}
           </StaggerChildren>
         </div>
       </section>

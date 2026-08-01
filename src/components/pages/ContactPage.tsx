@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import Image from "next/image";
+import ShimmerImage from "@/components/ShimmerImage";
 import { ArrowUpRight, Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { FadeUp } from "@/components/animations";
@@ -8,53 +8,41 @@ import { SITE } from "@/data/site";
 import { CallLink, WhatsAppLink, EmailLink, SocialLink } from "@/components/Cta";
 import { useLocale } from "@/i18n/LocaleProvider";
 import { CONTACT, CONTACT_SERVICE_OPTIONS } from "@/i18n/messages";
+import { buildMailtoHref, sendEnquiry } from "@/lib/enquiry";
 
 type ContactForm = { name: string; email: string; service: string; message: string };
-
-/**
- * The site is a static export with no server, so the form hands the enquiry to
- * the visitor's own mail client via a mailto: URL.
- *
- * Consequence worth knowing: we cannot confirm delivery. The browser never
- * reports whether a mail client opened or whether the visitor pressed send, so
- * the confirmation below is worded as "your email app should have opened"
- * rather than claiming the message was received.
- */
-function buildMailtoHref(payload: ContactForm): string {
-  const subject = payload.service
-    ? `New enquiry from ${payload.name} — ${payload.service}`
-    : `New enquiry from ${payload.name}`;
-
-  const body = [
-    `Name: ${payload.name}`,
-    `Email: ${payload.email}`,
-    `Service interest: ${payload.service || "Not specified"}`,
-    "",
-    "Message:",
-    payload.message,
-  ].join("\r\n");
-
-  // Encoding is required: unencoded & or # would truncate the URL at that point.
-  return `mailto:${SITE.contact.email}?subject=${encodeURIComponent(
-    subject,
-  )}&body=${encodeURIComponent(body)}`;
-}
+type Status = "idle" | "sending" | "sent" | "error";
 
 export default function ContactPage() {
   const locale = useLocale();
-  const [submitted, setSubmitted] = useState(false);
-  const [mailtoHref, setMailtoHref] = useState("");
-  const [form, setForm] = useState({ name: "", email: "", service: "", message: "" });
+  const [status, setStatus] = useState<Status>("idle");
+  const [form, setForm] = useState<ContactForm>({ name: "", email: "", service: "", message: "" });
+  // Honeypot. Kept out of `form` so it can never be sent as real content.
+  const [botcheck, setBotcheck] = useState("");
   const reduce = useReducedMotion();
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const href = buildMailtoHref(form);
-    setMailtoHref(href);
-    setSubmitted(true);
-    // Navigating rather than using window.open avoids the popup blocker, which
-    // silently swallows mailto: in several browsers.
-    window.location.href = href;
+    if (status === "sending") return;
+
+    setStatus("sending");
+    const result = await sendEnquiry({ ...form, botcheck });
+
+    if (result.ok) {
+      setStatus("sent");
+      setForm({ name: "", email: "", service: "", message: "" });
+      return;
+    }
+
+    // The form values are deliberately left intact so a retry costs nothing.
+    // `unconfigured` means NEXT_PUBLIC_WEB3FORMS_KEY is missing from the build —
+    // logged loudly because it is a deployment fault, not a visitor's.
+    if (result.reason === "unconfigured") {
+      console.error(
+        "[contact] NEXT_PUBLIC_WEB3FORMS_KEY is not set — enquiries cannot be delivered.",
+      );
+    }
+    setStatus("error");
   }
 
   return (
@@ -67,7 +55,7 @@ export default function ContactPage() {
           transition={{ duration: 1.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           className="absolute inset-0"
         >
-          <Image
+          <ShimmerImage
             src="/projects/salon-ali-yehia/02.jpg"
             alt={CONTACT.heroAlt[locale]}
             fill
@@ -150,12 +138,14 @@ export default function ContactPage() {
 
           {/* RIGHT: FORM */}
           <FadeUp delay={0.15}>
-            {submitted ? (
+            {status === "sent" ? (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
                 className="border border-border p-10 flex flex-col items-start gap-4"
+                role="status"
+                aria-live="polite"
               >
                 <span className="text-[10px] uppercase tracking-[0.3em] text-primary">
                   {CONTACT.sentEyebrow[locale]}
@@ -170,38 +160,33 @@ export default function ContactPage() {
                   {CONTACT.sentBody[locale]}
                 </p>
 
-                {/* Fallback: mailto silently does nothing when no mail client is
-                    configured, which is common on desktop and some mobile browsers. */}
                 <div className="border-t border-border pt-4 mt-2 w-full">
-                  <p className="text-muted-foreground text-xs leading-loose mb-3">
-                    {CONTACT.fallbackLead[locale]}{" "}
-                    <EmailLink className="text-primary hover:text-foreground transition-colors">
-                      {SITE.contact.email}
-                    </EmailLink>
-                    .
-                  </p>
-                  <div className="flex flex-wrap gap-4">
-                    <a
-                      href={mailtoHref}
-                      className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-primary border-b border-primary pb-1 hover:text-foreground hover:border-foreground transition-colors"
-                    >
-                      {CONTACT.reopen[locale]} <ArrowUpRight size={12} className="rtl:-scale-x-100" />
-                    </a>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setSubmitted(false);
-                        setMailtoHref("");
-                      }}
-                      className="text-xs uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      {CONTACT.edit[locale]}
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setStatus("idle")}
+                    className="text-xs uppercase tracking-[0.2em] text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {CONTACT.another[locale]}
+                  </button>
                 </div>
               </motion.div>
             ) : (
-              <form onSubmit={handleSubmit} data-cta="contact-form-submit" className="flex flex-col gap-6">
+              <form onSubmit={handleSubmit} data-cta="contact-form-submit" className="flex flex-col gap-6" noValidate={false}>
+                {/* Honeypot. Hidden from sight and from assistive tech, and skipped
+                    by keyboard tabbing — anything in it came from a bot. */}
+                <div className="absolute left-[-9999px] w-px h-px overflow-hidden" aria-hidden="true">
+                  <label htmlFor="botcheck">Do not fill this in</label>
+                  <input
+                    id="botcheck"
+                    name="botcheck"
+                    type="text"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={botcheck}
+                    onChange={(e) => setBotcheck(e.target.value)}
+                  />
+                </div>
+
                 {[
                   {
                     id: "name",
@@ -270,11 +255,54 @@ export default function ContactPage() {
                   />
                 </div>
 
+                {/* Delivery failed. The form keeps its values, so retrying is one
+                    click, and a mailto: escape hatch is offered as a last resort. */}
+                {status === "error" && (
+                  <div
+                    className="border border-destructive/40 bg-destructive/5 p-6 flex flex-col items-start gap-3"
+                    role="alert"
+                    aria-live="assertive"
+                  >
+                    <span className="text-[10px] uppercase tracking-[0.3em] text-destructive">
+                      {CONTACT.errorEyebrow[locale]}
+                    </span>
+                    <p
+                      className="font-black uppercase text-foreground text-xl"
+                      style={{ fontFamily: "var(--font-barlow), sans-serif" }}
+                    >
+                      {CONTACT.errorHeading[locale]}
+                    </p>
+                    <p className="text-muted-foreground text-xs leading-loose">
+                      {CONTACT.errorBody[locale]}
+                    </p>
+                    <p className="text-muted-foreground text-xs leading-loose">
+                      {CONTACT.orEmailDirect[locale]}{" "}
+                      <EmailLink className="text-primary hover:text-foreground transition-colors">
+                        {SITE.contact.email}
+                      </EmailLink>
+                      .
+                    </p>
+                    <a
+                      href={buildMailtoHref(form)}
+                      className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-primary border-b border-primary pb-1 hover:text-foreground hover:border-foreground transition-colors"
+                    >
+                      {CONTACT.openMailApp[locale]} <ArrowUpRight size={12} className="rtl:-scale-x-100" />
+                    </a>
+                  </div>
+                )}
+
                 <button
                   type="submit"
-                  className="mt-2 inline-flex items-center gap-3 bg-primary text-background text-xs uppercase tracking-[0.2em] px-8 py-4 font-bold hover:bg-foreground hover:text-background transition-colors duration-200 w-fit"
+                  disabled={status === "sending"}
+                  aria-busy={status === "sending"}
+                  className="mt-2 inline-flex items-center gap-3 bg-primary text-background text-xs uppercase tracking-[0.2em] px-8 py-4 font-bold hover:bg-foreground hover:text-background transition-colors duration-200 w-fit disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-primary disabled:hover:text-background"
                 >
-                  {CONTACT.submit[locale]} <ArrowUpRight size={14} className="rtl:-scale-x-100" />
+                  {status === "sending"
+                    ? CONTACT.sending[locale]
+                    : status === "error"
+                      ? CONTACT.retry[locale]
+                      : CONTACT.submit[locale]}
+                  <ArrowUpRight size={14} className="rtl:-scale-x-100" />
                 </button>
               </form>
             )}

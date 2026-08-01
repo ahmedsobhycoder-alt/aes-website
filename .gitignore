@@ -17,3 +17,5 @@ next-env.d.ts
 
 .vercel
 projectss/
+# Add this to your .gitignore if it isn't there already
+tsconfig.tsbuildinfo

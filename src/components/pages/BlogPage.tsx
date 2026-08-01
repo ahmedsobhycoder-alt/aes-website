@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
+import ShimmerImage from "@/components/ShimmerImage";
 import { FadeUp, StaggerChildren, StaggerItem } from "@/components/animations";
 import { BLOG_POSTS } from "@/data/blog";
 import { useLocale } from "@/i18n/LocaleProvider";
@@ -70,7 +70,7 @@ export default function BlogPage() {
                 <StaggerItem key={post.slug}>
                   <Link href={`/blog/${post.slug}`} className="group block bg-background">
                     <div className="relative aspect-[4/3] overflow-hidden bg-card">
-                      <Image
+                      <ShimmerImage
                         src={post.coverImg}
                         alt={title}
                         fill

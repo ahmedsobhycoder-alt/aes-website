@@ -1,7 +1,7 @@
 "use client";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
+import ShimmerImage from "@/components/ShimmerImage";
 import { FadeUp, StaggerChildren, StaggerItem } from "@/components/animations";
 import { SERVICES } from "@/data/services";
 import { useLocale } from "@/i18n/LocaleProvider";
@@ -65,7 +65,7 @@ export default function ServicesPage() {
                     </div>
                     <div className="md:col-span-6 md:col-start-7">
                       <div className="relative aspect-[16/10] overflow-hidden bg-card">
-                        <Image
+                        <ShimmerImage
                           src={s.img}
                           alt={title}
                           fill

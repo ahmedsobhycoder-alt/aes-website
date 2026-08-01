@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
+import ShimmerImage from "@/components/ShimmerImage";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { FadeUp, FadeIn, StaggerChildren, StaggerItem } from "@/components/animations";
@@ -30,7 +30,7 @@ export default function ServiceDetailPage({ slug }: { slug: string }) {
           transition={{ duration: 1.5, ease: EASE }}
           className="absolute inset-0"
         >
-          <Image src={hero} alt={service.title} fill priority sizes="100vw" className="object-cover" />
+          <ShimmerImage src={hero} alt={service.title} fill priority sizes="100vw" className="object-cover" />
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background" />
         <div className="absolute bottom-12 left-6 md:left-10 right-6 md:right-10">
@@ -155,7 +155,7 @@ export default function ServiceDetailPage({ slug }: { slug: string }) {
               {gallery.map((src, i) => (
                 <FadeIn key={src} delay={i * 0.08}>
                   <div className={`group relative aspect-[4/3] overflow-hidden bg-card ${i === 0 ? "md:col-span-2 md:aspect-[21/9]" : ""}`}>
-                    <Image
+                    <ShimmerImage
                       src={src}
                       alt={`${service.title} — related work ${i + 1}`}
                       fill

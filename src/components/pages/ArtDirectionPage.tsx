@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Image from "next/image";
+import ShimmerImage from "@/components/ShimmerImage";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { FadeUp, FadeIn } from "@/components/animations";
 import { EmailLink } from "@/components/Cta";
@@ -77,7 +77,7 @@ export default function ArtDirectionPage() {
       {/* COVER */}
       <FadeIn>
         <div className="relative w-full aspect-[4/3] md:aspect-[21/9] overflow-hidden bg-card">
-          <Image
+          <ShimmerImage
             src="/projects/rixance/01.jpg"
             alt="Art direction by AES — Rixance"
             fill

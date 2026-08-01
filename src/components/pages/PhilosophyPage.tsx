@@ -2,7 +2,7 @@
 import { useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
+import ShimmerImage from "@/components/ShimmerImage";
 import { motion, useScroll, useTransform, useReducedMotion } from "motion/react";
 import { FadeUp, FadeIn, StaggerChildren, StaggerItem } from "@/components/animations";
 import { useLocale } from "@/i18n/LocaleProvider";
@@ -24,7 +24,7 @@ function HeroParallax() {
         transition={{ duration: 1.7, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
         className="absolute inset-0 h-[130%]"
       >
-        <Image
+        <ShimmerImage
           src="/projects/aaly-al-makam/03.jpg"
           alt={PHILOSOPHY.heroAlt[locale]}
           fill
@@ -80,7 +80,7 @@ export default function PhilosophyPage() {
       <section className="border-t border-border">
         <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2">
           <FadeIn className="relative min-h-[500px] bg-card overflow-hidden">
-            <Image
+            <ShimmerImage
               src="/projects/ozel/02.jpg"
               alt={PHILOSOPHY.processAlt[locale]}
               fill

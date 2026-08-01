@@ -165,7 +165,11 @@ export const PROJECTS: Project[] = [
     challenge: "Antika Beirut needed New Cairo to taste Lebanon: a room where heritage feels lived in, not staged.",
     approach: "We wove traditional Lebanese elements through a modern frame, with customized artworks carrying the historical atmosphere.",
     outcome: "A warm dining space where old Beirut and new Cairo sit at the same table.",
-    gallery: g("Antique-Beirut", ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg"], "Antika Beirut"),
+    gallery: g(
+      "Antique-Beirut",
+      ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg"],
+      "Antika Beirut",
+    ),
   },
   {
     slug: "cassandra-food-court",
@@ -286,7 +290,27 @@ export const PROJECTS: Project[] = [
         { title: "Confidence by Design", body: "A strong, cohesive identity that empowers men to dress confidently and effortlessly, backed by an elevated customer experience." },
       ],
     },
-    gallery: g("rixance", ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg"], "Rixance"),
+    gallery: g("rixance", ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg"], "Rixance"),
+  },
+  {
+    slug: "engineers-apartment",
+    title: "Engineer's Apartment",
+    category: "Residential",
+    // Folder is `mohansen-apartment`, not the slug — the images were shot and
+    // filed under the location before the project was named.
+    cover: "/projects/mohansen-apartment/01.jpg",
+    alt: "Engineer's Apartment interior",
+    tags: ["Residential"],
+    client: "Private Client",
+    role: "Art Direction · Interior Design",
+    challenge: "A home designed for a client who measures. Every line, tolerance, and junction had to stand up to an engineer's questioning before it could earn its place.",
+    approach: "We designed from his day, not from the plan. Morning light, daily routes, and rest set the sequence, then material and detail were resolved to the precision the client himself would inspect.",
+    outcome: "A calm, exacting home where the effort disappears and only the ease remains. It passed its hardest inspection first, its owner's.",
+    gallery: g(
+      "mohansen-apartment",
+      ["01.jpg", "02.jpg", "03.jpg", "04.jpg", "05.jpg", "06.jpg", "07.jpg", "08.jpg", "09.jpg", "10.jpg", "11.jpg", "12.jpg", "13.jpg", "14.jpg", "15.jpg", "16.jpg", "17.jpg", "18.jpg", "19.jpg", "20.jpg", "21.jpg", "22.jpg", "23.jpg"],
+      "Engineer's Apartment",
+    ),
   },
 ];
 

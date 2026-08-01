@@ -1,17 +1,25 @@
 "use client";
+import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import ShimmerImage from "@/components/ShimmerImage";
+import { ArrowLeft, ArrowRight, Maximize2 } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
 import { FadeUp, FadeIn } from "@/components/animations";
 import { PROJECTS } from "@/data/projects";
 import { EmailLink, WhatsAppLink } from "@/components/Cta";
+import Lightbox from "@/components/Lightbox";
+import { useLocale } from "@/i18n/LocaleProvider";
+import { LIGHTBOX } from "@/i18n/messages";
 
 export default function WorkDetailPage({ slug }: { slug: string }) {
   const idx = PROJECTS.findIndex((p) => p.slug === slug);
   const project = PROJECTS[idx];
   const next = PROJECTS[(idx + 1) % PROJECTS.length];
   const reduce = useReducedMotion();
+  const locale = useLocale();
+  // Index into project.gallery, or null when the viewer is closed.
+  const [zoom, setZoom] = useState<number | null>(null);
+  const hasGallery = project.gallery.length > 0;
 
   return (
     <div className="pt-16">
@@ -23,7 +31,7 @@ export default function WorkDetailPage({ slug }: { slug: string }) {
           transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
           className="absolute inset-0"
         >
-          <Image
+          <ShimmerImage
             src={project.gallery[0]?.src ?? project.cover}
             alt={project.alt}
             fill
@@ -33,6 +41,19 @@ export default function WorkDetailPage({ slug }: { slug: string }) {
           />
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background" />
+        {/* The hero carries the project title on top of it, so it gets an
+            explicit expand control rather than being clickable as a whole —
+            a full-bleed click target here would fight text selection. */}
+        {hasGallery && (
+          <button
+            type="button"
+            onClick={() => setZoom(0)}
+            aria-label={`${LIGHTBOX.expand[locale]} — ${project.alt}`}
+            className="absolute end-6 top-24 z-10 border border-foreground/25 bg-background/40 p-3 text-foreground/80 backdrop-blur-sm transition-colors hover:border-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          >
+            <Maximize2 size={18} />
+          </button>
+        )}
         <div className="absolute bottom-12 left-6 md:left-10 right-6 md:right-10">
           <motion.div
             initial={{ opacity: 0, y: 32 }}
@@ -104,15 +125,20 @@ export default function WorkDetailPage({ slug }: { slug: string }) {
           {project.gallery[1] && (
             <div className="md:col-span-5 md:col-start-8">
               <FadeIn>
-                <div className="relative md:sticky md:top-24 aspect-[3/4] overflow-hidden bg-card">
-                  <Image
+                <button
+                  type="button"
+                  onClick={() => setZoom(1)}
+                  aria-label={`${LIGHTBOX.expand[locale]} — ${project.gallery[1].alt}`}
+                  className="group relative block w-full cursor-zoom-in md:sticky md:top-24 aspect-[3/4] overflow-hidden bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                >
+                  <ShimmerImage
                     src={project.gallery[1].src}
                     alt={project.gallery[1].alt}
                     fill
                     sizes="(max-width:768px) 100vw, 40vw"
-                    className="object-cover saturate-[0.85] transition-all duration-700 hover:saturate-100"
+                    className="object-cover saturate-[0.85] transition-all duration-700 group-hover:saturate-100"
                   />
-                </div>
+                </button>
               </FadeIn>
             </div>
           )}
@@ -123,24 +149,36 @@ export default function WorkDetailPage({ slug }: { slug: string }) {
       <section className="pb-24">
         {project.gallery[2] && (
           <FadeIn>
-            <div className="relative w-full aspect-[21/9] overflow-hidden bg-card">
-              <Image src={project.gallery[2].src} alt={project.gallery[2].alt} fill sizes="100vw" className="object-cover" />
-            </div>
+            <button
+              type="button"
+              onClick={() => setZoom(2)}
+              aria-label={`${LIGHTBOX.expand[locale]} — ${project.gallery[2].alt}`}
+              className="relative block w-full cursor-zoom-in aspect-[21/9] overflow-hidden bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+            >
+              <ShimmerImage src={project.gallery[2].src} alt={project.gallery[2].alt} fill sizes="100vw" className="object-cover" />
+            </button>
           </FadeIn>
         )}
         <div className="px-6 md:px-10 mt-6 md:mt-8">
           <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
             {project.gallery.slice(3).map((img, i) => (
               <FadeUp key={i} delay={(i % 2) * 0.08}>
-                <div className="group relative aspect-[4/3] overflow-hidden bg-card">
-                  <Image
+                {/* slice(3) restarts i at 0, so the gallery index is i + 3 —
+                    without the offset every tile would open the wrong image. */}
+                <button
+                  type="button"
+                  onClick={() => setZoom(i + 3)}
+                  aria-label={`${LIGHTBOX.expand[locale]} — ${img.alt}`}
+                  className="group relative block w-full cursor-zoom-in aspect-[4/3] overflow-hidden bg-card focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                >
+                  <ShimmerImage
                     src={img.src}
                     alt={img.alt}
                     fill
                     sizes="(max-width:768px) 100vw, 50vw"
                     className="object-cover saturate-[0.85] transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:saturate-100 group-hover:scale-[1.04]"
                   />
-                </div>
+                </button>
               </FadeUp>
             ))}
           </div>
@@ -188,6 +226,15 @@ export default function WorkDetailPage({ slug }: { slug: string }) {
           </Link>
         </div>
       </div>
+
+      {/* Every image on this page opens the same viewer, so arrowing through it
+          walks the whole project gallery rather than just the tile clicked. */}
+      <Lightbox
+        images={project.gallery}
+        index={zoom}
+        onIndexChange={setZoom}
+        onClose={() => setZoom(null)}
+      />
     </div>
   );
 }

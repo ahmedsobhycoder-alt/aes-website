@@ -2,7 +2,7 @@
 import { useRef, useState, useEffect } from "react";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
+import ShimmerImage from "@/components/ShimmerImage";
 import {
   motion,
   AnimatePresence,
@@ -106,7 +106,7 @@ function HeroSlideshow() {
             }}
             className="absolute inset-0 h-[118%]"
           >
-            <Image
+            <ShimmerImage
               src={HERO_SLIDES[i].src}
               alt={fmt(HOME.heroAlt[locale], { label: HERO_SLIDE_LABELS[i][locale] })}
               fill
@@ -156,7 +156,7 @@ function ClientCell({ client, index }: { client: Client; index: number }) {
         {String(index + 1).padStart(2, "0")}
       </span>
       <div className="relative h-14 w-full md:h-20">
-        <Image
+        <ShimmerImage
           src={client.image}
           alt={locale === "ar" ? fmt(HOME.clientLogoAlt.ar, { name }) : client.alt}
           fill
@@ -374,7 +374,7 @@ export default function HomePage() {
             </p>
           </FadeUp>
           <FadeUp delay={0.2} className="md:col-span-12">
-            <ul className="grid grid-cols-2 md:grid-cols-3 border-t border-s border-border">
+            <ul className="grid grid-cols-2 md:grid-cols-3 border-t border-s border-border bg-muted">
               {CLIENTS.map((c, i) => (
                 <li
                   key={c.id}
@@ -474,7 +474,7 @@ export default function HomePage() {
                   }}
                   className="absolute inset-0"
                 >
-                  <Image
+                  <ShimmerImage
                     src={SERVICES[activeService].img}
                     alt={
                       SERVICE_COPY[SERVICES[activeService].slug]?.title[locale] ??
@@ -535,7 +535,7 @@ export default function HomePage() {
                   className="group relative block bg-background cursor-pointer"
                 >
                   <div className="relative aspect-[4/5] overflow-hidden bg-card">
-                    <Image
+                    <ShimmerImage
                       src={p.cover}
                       alt={p.alt}
                       fill
@@ -579,7 +579,7 @@ export default function HomePage() {
       <section className="border-t border-border">
         <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2">
           <div className="relative h-80 md:h-auto min-h-[500px] bg-card overflow-hidden">
-            <Image
+            <ShimmerImage
               src="/projects/nuwa/03.jpg"
               alt={HOME.philosophyAlt[locale]}
               fill
